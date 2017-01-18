@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4C4BB6D3-479C-4CA1-A5E0-6F3A7D5F1FBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Stencil.Data.Sql</RootNamespace>
+    <AssemblyName>Stencil.Data.Sql</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Codeable.Foundation.Common, Version=4.0.39.12204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Codeable.Foundation.Core, Version=4.0.39.12204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Codeable.Foundation.Web.Common, Version=4.0.39.12204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Web.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Codeable.Foundation.Web.Core, Version=4.0.39.12205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Web.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dbAccount.cs">
+      <DependentUpon>StencilModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbAsset.cs">
+      <DependentUpon>StencilModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbGlobalSetting.cs">
+      <DependentUpon>StencilModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DatabaseExtensions.cs" />
+    <Compile Include="IStencilContextFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="spIndexHydrate_Status_Result.cs">
+      <DependentUpon>StencilModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spIndex_Status_Result.cs">
+      <DependentUpon>StencilModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StencilContext.cs" />
+    <Compile Include="StencilContextFactory.cs" />
+    <Compile Include="StencilDbConfiguration.cs" />
+    <Compile Include="StencilModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StencilModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StencilModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StencilModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StencilModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StencilModel.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="StencilModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StencilModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="StencilModel.edmx.diagram">
+      <DependentUpon>StencilModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StencilModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StencilModel.edmx</DependentUpon>
+      <LastGenOutput>StencilModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="StencilModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StencilModel.edmx</DependentUpon>
+      <LastGenOutput>StencilModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Stencil.Common\Stencil.Common.csproj">
+      <Project>{c2ee0d22-4be4-4dde-9f19-997644057d0d}</Project>
+      <Name>Stencil.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

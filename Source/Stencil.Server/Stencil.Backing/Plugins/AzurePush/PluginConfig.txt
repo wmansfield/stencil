@@ -1,0 +1,7 @@
+﻿AssemblyFileName: Stencil.Plugins.AzurePush.dll
+SystemName: AzurePush
+FriendlyName: Stencil - AzurePush
+Description: Provides push notifications
+Version: 1.0 
+Author: wmansfield@socialhaven.com
+Feature: Unknown

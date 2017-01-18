@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>5b25b0a6-7c8e-4ab2-b2cf-9d027fff19ab</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Stencil.Native</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App\Config\AppPreferences.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)App\StencilApp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\BaseFileStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\CacheHost.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\DataCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\IFileStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\ICacheHost.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\IDataCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\IDataCacheFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\RequestToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\SizeDataCacheFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\TimedDataCacheFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\_DataCacheExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Caching\_Delegates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\BaseClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Container.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CoreTrack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CoreUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ITrack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\IViewPlatform.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\_CoreExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)I18NToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IStencilApp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NativeAssumptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MediaUploader\AmazonUploadInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MediaUploader\BaseMediaUploader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MediaUploader\IMediaUploader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MediaUploader\ToastChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MediaUploader\UploadProgressArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MediaUploader\UploadRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MediaUploader\UploadToast.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseDataItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseDataListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModelLanguage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IDataItemViewModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IDataListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IDataListViewModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IViewModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
+  </ItemGroup>
+</Project>

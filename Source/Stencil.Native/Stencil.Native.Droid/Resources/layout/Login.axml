@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+  <Stencil.Native.Droid.CoreEditText
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:id="@+id/general_user"
+      android:hint="email@domain.com"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:textSize="17sp"
+      android:inputType="textEmailAddress"
+      android:nextFocusForward="@+id/general_password" />
+  <Stencil.Native.Droid.CoreEditText
+      android:inputType="textPassword"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:id="@+id/general_password"
+      android:hint="password"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="10dp"
+      android:textSize="17sp" />
+  <Stencil.Native.Droid.CoreButton
+      android:id="@+id/general_button"
+      android:layout_width="220dp"
+      android:layout_height="40dp"
+      android:text="SIGN IN"
+      android:layout_marginTop="15dp"
+      android:layout_marginBottom="10dp"
+      android:textSize="17sp" />
+</LinearLayout>
+

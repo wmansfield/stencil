@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Stencil.Data.Sql.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="account_id" />
+          </Key>
+          <Property Name="account_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="password_salt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="disabled" Type="bit" Nullable="false" />
+          <Property Name="api_key" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="api_secret" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="entitlements" Type="nvarchar" MaxLength="250" />
+          <Property Name="password_reset_token" Type="nvarchar" MaxLength="50" />
+          <Property Name="password_reset_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="push_ios" Type="nvarchar" MaxLength="100" />
+          <Property Name="push_google" Type="nvarchar" MaxLength="100" />
+          <Property Name="push_microsoft" Type="nvarchar" MaxLength="100" />
+          <Property Name="last_login_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="last_login_platform" Type="nvarchar" MaxLength="250" />
+          <Property Name="created_utc" Type="datetimeoffset" Precision="0" Nullable="false" />
+          <Property Name="updated_utc" Type="datetimeoffset" Precision="0" Nullable="false" />
+          <Property Name="deleted_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="sync_hydrate_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="sync_success_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="sync_invalid_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="sync_attempt_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="sync_agent" Type="nvarchar" MaxLength="50" />
+          <Property Name="sync_log" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="asset_id" />
+          </Key>
+          <Property Name="asset_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="available" Type="bit" Nullable="false" />
+          <Property Name="resize_required" Type="bit" Nullable="false" />
+          <Property Name="encode_required" Type="bit" Nullable="false" />
+          <Property Name="resize_processing" Type="bit" Nullable="false" />
+          <Property Name="encode_processing" Type="bit" Nullable="false" />
+          <Property Name="thumb_small_dimensions" Type="nvarchar" MaxLength="10" />
+          <Property Name="thumb_medium_dimensions" Type="nvarchar" MaxLength="10" />
+          <Property Name="thumb_large_dimensions" Type="nvarchar" MaxLength="10" />
+          <Property Name="resize_status" Type="nvarchar" MaxLength="50" />
+          <Property Name="resize_attempts" Type="int" Nullable="false" />
+          <Property Name="resize_attempt_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="encode_identifier" Type="nvarchar" MaxLength="50" />
+          <Property Name="encode_status" Type="nvarchar" MaxLength="50" />
+          <Property Name="raw_url" Type="nvarchar" MaxLength="512" />
+          <Property Name="public_url" Type="nvarchar" MaxLength="512" />
+          <Property Name="thumb_small_url" Type="nvarchar" MaxLength="512" />
+          <Property Name="thumb_medium_url" Type="nvarchar" MaxLength="512" />
+          <Property Name="thumb_large_url" Type="nvarchar" MaxLength="512" />
+          <Property Name="encode_log" Type="nvarchar(max)" />
+          <Property Name="resize_log" Type="nvarchar(max)" />
+          <Property Name="dependencies" Type="int" Nullable="false" />
+          <Property Name="encode_attempts" Type="int" Nullable="false" />
+          <Property Name="encode_attempt_utc" Type="datetimeoffset" Precision="0" />
+          <Property Name="resize_mode" Type="nvarchar" MaxLength="20" />
+          <Property Name="created_utc" Type="datetimeoffset" Precision="0" Nullable="false" />
+          <Property Name="updated_utc" Type="datetimeoffset" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GlobalSetting">
+          <Key>
+            <PropertyRef Name="global_setting_id" />
+          </Key>
+          <Property Name="global_setting_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="value" Type="nvarchar(max)" />
+        </EntityType>
+        <Function Name="spAccount_HydrateSyncGetInvalid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="allowableSecondsToProcessIndex" Type="int" Mode="In" />
+          <Parameter Name="sync_agent" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spAccount_HydrateSyncUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="account_id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="sync_success" Type="bit" Mode="In" />
+          <Parameter Name="sync_hydrate_utc" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="sync_log" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="spAccount_SyncGetInvalid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="allowableSecondsToProcessIndex" Type="int" Mode="In" />
+          <Parameter Name="sync_agent" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spAccount_SyncUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="account_id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="sync_success" Type="bit" Mode="In" />
+          <Parameter Name="sync_success_utc" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="sync_log" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="spIndex_InvalidateAggregates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spIndex_InvalidateAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spIndex_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spIndexHydrate_InvalidateAggregates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spIndexHydrate_InvalidateAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spIndexHydrate_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="StencilDataSqlStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asset" EntityType="Self.Asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GlobalSetting" EntityType="Self.GlobalSetting" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Stencil.Data.Sql" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StencilContext" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="dbAccounts" EntityType="Stencil.Data.Sql.dbAccount" />
+          <EntitySet Name="dbGlobalSettings" EntityType="Stencil.Data.Sql.dbGlobalSetting" />
+          <FunctionImport Name="spAccount_HydrateSyncGetInvalid" ReturnType="Collection(Guid)">
+            <Parameter Name="allowableSecondsToProcessIndex" Mode="In" Type="Int32" />
+            <Parameter Name="sync_agent" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAccount_HydrateSyncUpdate">
+            <Parameter Name="account_id" Mode="In" Type="Guid" />
+            <Parameter Name="sync_success" Mode="In" Type="Boolean" />
+            <Parameter Name="sync_hydrate_utc" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="sync_log" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAccount_SyncGetInvalid" ReturnType="Collection(Guid)">
+            <Parameter Name="allowableSecondsToProcessIndex" Mode="In" Type="Int32" />
+            <Parameter Name="sync_agent" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAccount_SyncUpdate">
+            <Parameter Name="account_id" Mode="In" Type="Guid" />
+            <Parameter Name="sync_success" Mode="In" Type="Boolean" />
+            <Parameter Name="sync_success_utc" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="sync_log" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spIndex_InvalidateAggregates" />
+          <FunctionImport Name="spIndex_InvalidateAll" />
+          <FunctionImport Name="spIndex_Status" ReturnType="Collection(Stencil.Data.Sql.spIndex_Status_Result)" />
+          <FunctionImport Name="spIndexHydrate_InvalidateAggregates" />
+          <FunctionImport Name="spIndexHydrate_InvalidateAll" />
+          <FunctionImport Name="spIndexHydrate_Status" ReturnType="Collection(Stencil.Data.Sql.spIndexHydrate_Status_Result)" />
+          <EntitySet Name="dbAssets" EntityType="Stencil.Data.Sql.dbAsset" />
+        </EntityContainer>
+        <EntityType Name="dbAccount">
+          <Key>
+            <PropertyRef Name="account_id" />
+          </Key>
+          <Property Name="account_id" Type="Guid" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="password_salt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="disabled" Type="Boolean" Nullable="false" />
+          <Property Name="api_key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="api_secret" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="entitlements" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="last_login_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="last_login_platform" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="created_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
+          <Property Name="updated_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
+          <Property Name="deleted_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_hydrate_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_success_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_invalid_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_attempt_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sync_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="password_reset_token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password_reset_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="push_ios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="push_google" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="push_microsoft" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dbGlobalSetting">
+          <Key>
+            <PropertyRef Name="global_setting_id" />
+          </Key>
+          <Property Name="global_setting_id" Type="Guid" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="spIndex_Status_Result">
+          <Property Type="String" Name="Pending_Items" Nullable="false" MaxLength="13" />
+          <Property Type="Int32" Name="Account___10" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spIndexHydrate_Status_Result">
+          <Property Type="String" Name="Pending_Items" Nullable="false" MaxLength="13" />
+          <Property Type="Int32" Name="Account___10" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="dbAsset">
+          <Key>
+            <PropertyRef Name="asset_id" />
+          </Key>
+          <Property Name="asset_id" Type="Guid" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="available" Type="Boolean" Nullable="false" />
+          <Property Name="resize_required" Type="Boolean" Nullable="false" />
+          <Property Name="encode_required" Type="Boolean" Nullable="false" />
+          <Property Name="resize_processing" Type="Boolean" Nullable="false" />
+          <Property Name="encode_processing" Type="Boolean" Nullable="false" />
+          <Property Name="thumb_small_dimensions" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="thumb_medium_dimensions" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="thumb_large_dimensions" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="resize_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="resize_attempts" Type="Int32" Nullable="false" />
+          <Property Name="resize_attempt_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="encode_identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="encode_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="raw_url" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="public_url" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="thumb_small_url" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="thumb_medium_url" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="thumb_large_url" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="encode_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="resize_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dependencies" Type="Int32" Nullable="false" />
+          <Property Name="encode_attempts" Type="Int32" Nullable="false" />
+          <Property Name="encode_attempt_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="resize_mode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="created_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
+          <Property Name="updated_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StencilDataSqlStoreContainer" CdmEntityContainer="StencilContext" >
+          <EntitySetMapping Name="dbAccounts">
+            <EntityTypeMapping TypeName="Stencil.Data.Sql.dbAccount">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="push_microsoft" ColumnName="push_microsoft" />
+                <ScalarProperty Name="push_google" ColumnName="push_google" />
+                <ScalarProperty Name="push_ios" ColumnName="push_ios" />
+                <ScalarProperty Name="password_reset_utc" ColumnName="password_reset_utc" />
+                <ScalarProperty Name="password_reset_token" ColumnName="password_reset_token" />
+                <ScalarProperty Name="sync_log" ColumnName="sync_log" />
+                <ScalarProperty Name="sync_agent" ColumnName="sync_agent" />
+                <ScalarProperty Name="sync_attempt_utc" ColumnName="sync_attempt_utc" />
+                <ScalarProperty Name="sync_invalid_utc" ColumnName="sync_invalid_utc" />
+                <ScalarProperty Name="sync_success_utc" ColumnName="sync_success_utc" />
+                <ScalarProperty Name="sync_hydrate_utc" ColumnName="sync_hydrate_utc" />
+                <ScalarProperty Name="deleted_utc" ColumnName="deleted_utc" />
+                <ScalarProperty Name="updated_utc" ColumnName="updated_utc" />
+                <ScalarProperty Name="created_utc" ColumnName="created_utc" />
+                <ScalarProperty Name="last_login_platform" ColumnName="last_login_platform" />
+                <ScalarProperty Name="last_login_utc" ColumnName="last_login_utc" />
+                <ScalarProperty Name="entitlements" ColumnName="entitlements" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="api_secret" ColumnName="api_secret" />
+                <ScalarProperty Name="api_key" ColumnName="api_key" />
+                <ScalarProperty Name="disabled" ColumnName="disabled" />
+                <ScalarProperty Name="password_salt" ColumnName="password_salt" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dbGlobalSettings">
+            <EntityTypeMapping TypeName="Stencil.Data.Sql.dbGlobalSetting">
+              <MappingFragment StoreEntitySet="GlobalSetting">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="global_setting_id" ColumnName="global_setting_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spAccount_HydrateSyncGetInvalid" FunctionName="Stencil.Data.Sql.Store.spAccount_HydrateSyncGetInvalid" />
+          <FunctionImportMapping FunctionImportName="spAccount_HydrateSyncUpdate" FunctionName="Stencil.Data.Sql.Store.spAccount_HydrateSyncUpdate" />
+          <FunctionImportMapping FunctionImportName="spAccount_SyncGetInvalid" FunctionName="Stencil.Data.Sql.Store.spAccount_SyncGetInvalid" />
+          <FunctionImportMapping FunctionImportName="spAccount_SyncUpdate" FunctionName="Stencil.Data.Sql.Store.spAccount_SyncUpdate" />
+          <FunctionImportMapping FunctionImportName="spIndex_InvalidateAggregates" FunctionName="Stencil.Data.Sql.Store.spIndex_InvalidateAggregates" />
+          <FunctionImportMapping FunctionImportName="spIndex_InvalidateAll" FunctionName="Stencil.Data.Sql.Store.spIndex_InvalidateAll" />
+          <FunctionImportMapping FunctionImportName="spIndex_Status" FunctionName="Stencil.Data.Sql.Store.spIndex_Status">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Stencil.Data.Sql.spIndex_Status_Result">
+                <ScalarProperty Name="Pending_Items" ColumnName="Pending Items" />
+                <ScalarProperty Name="Account___10" ColumnName="Account - 10" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spIndexHydrate_InvalidateAggregates" FunctionName="Stencil.Data.Sql.Store.spIndexHydrate_InvalidateAggregates" />
+          <FunctionImportMapping FunctionImportName="spIndexHydrate_InvalidateAll" FunctionName="Stencil.Data.Sql.Store.spIndexHydrate_InvalidateAll" />
+          <FunctionImportMapping FunctionImportName="spIndexHydrate_Status" FunctionName="Stencil.Data.Sql.Store.spIndexHydrate_Status">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Stencil.Data.Sql.spIndexHydrate_Status_Result">
+                <ScalarProperty Name="Pending_Items" ColumnName="Pending Items" />
+                <ScalarProperty Name="Account___10" ColumnName="Account - 10" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="dbAssets">
+            <EntityTypeMapping TypeName="Stencil.Data.Sql.dbAsset">
+              <MappingFragment StoreEntitySet="Asset">
+                <ScalarProperty Name="updated_utc" ColumnName="updated_utc" />
+                <ScalarProperty Name="created_utc" ColumnName="created_utc" />
+                <ScalarProperty Name="resize_mode" ColumnName="resize_mode" />
+                <ScalarProperty Name="encode_attempt_utc" ColumnName="encode_attempt_utc" />
+                <ScalarProperty Name="encode_attempts" ColumnName="encode_attempts" />
+                <ScalarProperty Name="dependencies" ColumnName="dependencies" />
+                <ScalarProperty Name="resize_log" ColumnName="resize_log" />
+                <ScalarProperty Name="encode_log" ColumnName="encode_log" />
+                <ScalarProperty Name="thumb_large_url" ColumnName="thumb_large_url" />
+                <ScalarProperty Name="thumb_medium_url" ColumnName="thumb_medium_url" />
+                <ScalarProperty Name="thumb_small_url" ColumnName="thumb_small_url" />
+                <ScalarProperty Name="public_url" ColumnName="public_url" />
+                <ScalarProperty Name="raw_url" ColumnName="raw_url" />
+                <ScalarProperty Name="encode_status" ColumnName="encode_status" />
+                <ScalarProperty Name="encode_identifier" ColumnName="encode_identifier" />
+                <ScalarProperty Name="resize_attempt_utc" ColumnName="resize_attempt_utc" />
+                <ScalarProperty Name="resize_attempts" ColumnName="resize_attempts" />
+                <ScalarProperty Name="resize_status" ColumnName="resize_status" />
+                <ScalarProperty Name="thumb_large_dimensions" ColumnName="thumb_large_dimensions" />
+                <ScalarProperty Name="thumb_medium_dimensions" ColumnName="thumb_medium_dimensions" />
+                <ScalarProperty Name="thumb_small_dimensions" ColumnName="thumb_small_dimensions" />
+                <ScalarProperty Name="encode_processing" ColumnName="encode_processing" />
+                <ScalarProperty Name="resize_processing" ColumnName="resize_processing" />
+                <ScalarProperty Name="encode_required" ColumnName="encode_required" />
+                <ScalarProperty Name="resize_required" ColumnName="resize_required" />
+                <ScalarProperty Name="available" ColumnName="available" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="asset_id" ColumnName="asset_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

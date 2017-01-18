@@ -1,0 +1,7 @@
+﻿AssemblyFileName: Stencil.Plugins.SystemMonitor.dll
+SystemName: SystemMonitor
+FriendlyName: Stencil - SystemMonitor
+Description: Provides a SystemMonitor for debugging
+Version: 1.0 
+Author: wmansfield@socialhaven.com
+Feature: Unknown

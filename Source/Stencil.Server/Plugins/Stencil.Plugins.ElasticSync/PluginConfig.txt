@@ -1,0 +1,7 @@
+﻿AssemblyFileName: Stencil.Plugins.ElasticSync.dll
+SystemName: ElasticSync
+FriendlyName: Stencil - ElasticSync
+Description: Provides elastic search synchronization
+Version: 1.0 
+Author: wmansfield@socialhaven.com
+Feature: Unknown

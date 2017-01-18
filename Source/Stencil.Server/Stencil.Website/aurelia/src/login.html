@@ -1,0 +1,43 @@
+<template>
+  <section class="au-animate">
+      
+  <div class="account-wrapper">
+    <div class="account-body">
+
+      <h3>Welcome To Stencil</h3>
+      <h5>Please sign in to access your account.</h5>
+
+      <form id="loginForm" class="form" role="form" onsubmit="return false;" submit.delegate="submit()">
+
+        <div class="form-group">
+          <label for="login-username" class="placeholder-hidden">Username</label>
+          <input type="text" class="form-control" id="login-username" placeholder="email@domain.com" value.bind="userName" tabindex="1" data-parsley-required="true" >
+        </div> <!-- /.form-group -->
+
+        <div class="form-group">
+          <label for="login-password" class="placeholder-hidden">Password</label>
+          <input type="password" class="form-control" id="login-password" placeholder="Password" value.bind="password" tabindex="2" data-parsley-required="true">
+        </div> <!-- /.form-group -->
+
+        <div class="form-group clearfix">
+          <div class="pull-left">					
+            <label class="checkbox-inline">
+            <input type="checkbox" name="persist" class="" value="" tabindex="3" checked.bind="persist"> <small>Remember me</small>
+            </label>
+          </div>
+        </div> <!-- /.form-group -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block btn-lg" tabindex="4" disabled.bind="processing">
+            Sign In &nbsp; <i class="fa fa-play-circle"></i>
+          </button>
+        </div> <!-- /.form-group -->
+        <div class="text-center"> 
+            <i class="fa fa-spinner fa-spin" if.bind="processing"></i>
+        </div>
+      </form>
+    </div> <!-- /.account-body -->
+    
+  </div> <!-- /.account-wrapper -->
+  </section>
+</template>

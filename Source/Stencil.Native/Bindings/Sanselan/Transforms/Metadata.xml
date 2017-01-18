@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <attr path="/api/package[@name='org.apache.sanselan.formats.jpeg.xmp']/class[@name='JpegRewriter.JFIFPieceSegment']" name="visibility">public</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.formats.jpeg.xmp']/class[@name='JpegRewriter.JFIFPiece']" name="visibility">public</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.formats.tiff']/class[@name='TiffImageData.Tiles']/field[@name='tiles']" name="managedName">tiles</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.formats.tiff']/class[@name='TiffImageData.Strips']/field[@name='strips']" name="managedName">strips</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.formats.gif']/class[@name='GIFBlock']" name="visibility">public</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.util']/class[@name='UnicodeUtils.UnicodeMetricsUTF8']/method[@name='findEnd']" name="visibility">protected</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.util']/class[@name='UnicodeUtils.UnicodeMetricsUTF16WithBOM']/method[@name='findEnd']" name="visibility">protected</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.util']/class[@name='UnicodeUtils.UnicodeMetricsUTF16']/method[@name='findEnd']" name="visibility">protected</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.util']/class[@name='UnicodeUtils.UnicodeMetricsASCII']/method[@name='findEnd']" name="visibility">protected</attr>
+
+
+  <attr path="/api/package[@name='org.apache.sanselan.palette']/class[@name='ColorSpaceSubset']" name="visibility">public</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.formats.tiff.write']/class[@name='TiffOutputItem']" name="visibility">public</attr>
+
+    <!--<attr path="/api/package[@name='org.apache.sanselan.util']/class[@name='UnicodeUtils.UnicodeMetricsUTF16']/method[@name='findEnd']" name="visibility">protected</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.util']/class[@name='UnicodeUtils.UnicodeMetricsUTF16']/method[@name='findEnd']" name="visibility">protected</attr>
+  <attr path="/api/package[@name='org.apache.sanselan.util']/class[@name='UnicodeUtils.UnicodeMetricsUTF16']/method[@name='findEnd']" name="visibility">protected</attr>
+  -->
+</metadata>

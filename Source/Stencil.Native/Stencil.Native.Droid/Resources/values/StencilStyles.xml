@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="cell_tag">cell</string>
+
+  <style name="Theme.Stencil" parent="Theme.Stencil.Base">
+  </style>
+  <style name="Theme.Stencil.DarkTop" parent="Theme.Stencil.Base">
+    <item name="colorPrimaryDark">@android:color/black</item>
+  </style>
+  <style name="Theme.Stencil.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimaryDark">@color/active</item>
+    <item name="colorPrimary">@color/active</item>
+    <item name="colorAccent">@android:color/black</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <color name="active">#FF2F4354</color>
+  <color name="inactive">#FF52596B</color>
+  <color name="refresh_color2">#FFB455B6</color>
+  <color name="refresh_color1">#FF2C3E50</color>
+  <color name="refresh_color4">#FF77D065</color>
+  <color name="refresh_color3">#FF738182</color>
+  
+
+</resources>

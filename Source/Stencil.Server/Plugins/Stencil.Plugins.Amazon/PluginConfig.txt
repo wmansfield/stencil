@@ -1,0 +1,7 @@
+﻿AssemblyFileName: Stencil.Plugins.Amazon.dll
+SystemName: Amazon
+FriendlyName: Stencil - Amazon
+Description: Provides photo/video storage and processing
+Version: 1.0 
+Author: wmansfield@socialhaven.com
+Feature: Unknown

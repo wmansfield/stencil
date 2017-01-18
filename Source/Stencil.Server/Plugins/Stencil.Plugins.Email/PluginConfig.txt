@@ -1,0 +1,7 @@
+﻿AssemblyFileName: Stencil.Plugins.Email.dll
+SystemName: Email
+FriendlyName: Stencil - Email
+Description: Provides emailing support
+Version: 1.0 
+Author: wmansfield@socialhaven.com
+Feature: Unknown

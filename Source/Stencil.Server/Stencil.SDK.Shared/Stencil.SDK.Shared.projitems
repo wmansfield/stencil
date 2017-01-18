@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ce7b5aae-da60-4a11-9c88-d8cc37f5ab69</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Stencil.SDK</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ActionResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\AccountsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\AuthEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\AccountEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\AssetEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\GlobalSettingEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\EndpointBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\ServerEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EndpointException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EndpointTimeoutException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDPair.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AppConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Asset.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AssetType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\EndpointConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IItemID.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Requests\AuthLoginInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Requests\PasswordResetInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Requests\PushTokenInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Requests\RegisterInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Responses\AccountInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Responses\UpdateRequiredInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SDKModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PagingInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SDKUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Security\HashedTimeSignatureGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Serialization\NewtonSoftSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StencilAuthInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StencilSDK_Endpoints_Manual.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Dependency.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GlobalSetting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StencilSDK.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StencilSDK_Endpoints_Core.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StencilSDK_Sharp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SteppingInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VisualEncryption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)_Extensions\_EncryptionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)_Extensions\_ResultExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)_Extensions\_SDKExtensions.cs" />
+  </ItemGroup>
+</Project>

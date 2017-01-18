@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items schema="dbo" projectName="Stencil" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Tools\Stencil.xsd">
+  <item name="GlobalSetting" friendlyName="Global Setting" uiDisplayField="name">
+    <field type="Guid" dbType="uniqueidentifier" isNullable="false" friendlyName="GlobalSetting ID">global_setting_id</field>
+    <field type="string" dbType="nvarchar(100)" isNullable="false" searchable="true" friendlyName="Name">name</field>
+    <field type="string" dbType="nvarchar(max)" isNullable="true" friendlyName="Value">value</field>
+  </item>
+  <item name="Account" friendlyName="Account" uiDisplayField="first_name" useIndex="true" indexPriority="10" >
+    <field type="Guid" dbType="uniqueidentifier" isNullable="false" friendlyName="Account ID">account_id</field>
+    <field type="string" dbType="nvarchar(250)" isNullable="false" searchable="true" sortable="true" friendlyName="E-mail">email</field>
+    <field type="string" dbType="nvarchar(250)" isNullable="false" uiListHidden="true" friendlyName="Password">password</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="false" uiListHidden="true" generateTokenIfEmpty="true" friendlyName="Password Salt">password_salt</field>
+    <field type="bool" dbType="bit" isNullable="false" friendlyName="Is Disabled">disabled</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="false" uiListHidden="true" ukGroup="account_key" generateTokenIfEmpty="true" friendlyName="API Key">api_key</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="false" uiListHidden="true" generateTokenIfEmpty="true" friendlyName="API Secret">api_secret</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="true" sortable="true" friendlyName="First Name">first_name</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="true" sortable="true" friendlyName="Last Name">last_name</field>
+    <field type="string" dbType="nvarchar(250)" isNullable="true" friendlyName="Entitlements">entitlements</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="true" uiListHidden="true" generateTokenIfEmpty="true" friendlyName="Password Reset Token">password_reset_token</field>
+    <field type="DateTime" dbType="datetimeoffset(0)" isNullable="true" uiListHidden="true" friendlyName="Password Reset Date">password_reset_utc</field>
+    <field type="string" dbType="nvarchar(100)" isNullable="true" uiListHidden="true" friendlyName="Push Token IOS">push_ios</field>
+    <field type="string" dbType="nvarchar(100)" isNullable="true" uiListHidden="true" friendlyName="Push Token Google">push_google</field>
+    <field type="string" dbType="nvarchar(100)" isNullable="true" uiListHidden="true" friendlyName="Push Token Microsoft">push_microsoft</field>
+    <field type="DateTime" dbType="datetimeoffset(0)" isNullable="true" sortable="true" friendlyName="Last Login">last_login_utc</field>
+    <field type="string" dbType="nvarchar(250)" isNullable="true" sortable="true" friendlyName="Last Login Platform">last_login_platform</field>
+  </item>
+  <item name="Asset" friendlyName="Asset" uiDisplayField="asset_id" trackUpdates="true">
+    <field type="Guid" dbType="uniqueidentifier" isNullable="false" friendlyName="Asset ID">asset_id</field>
+    <field type="AssetType" dbType="int" isNullable="false" friendlyName="Asset Type">type</field>
+    <field type="bool" dbType="bit" isNullable="false" friendlyName="Available">available</field>
+    <field type="bool" dbType="bit" isNullable="false" friendlyName="Should Resize">resize_required</field>
+    <field type="bool" dbType="bit" isNullable="false" friendlyName="Should Encode">encode_required</field>
+    <field type="bool" dbType="bit" isNullable="false" friendlyName="Is Resizing">resize_processing</field>
+    <field type="bool" dbType="bit" isNullable="false" friendlyName="Is Encoding">encode_processing</field>
+    <field type="string" dbType="nvarchar(10)" isNullable="true" friendlyName="Thumb Small Dimensions">thumb_small_dimensions</field>
+    <field type="string" dbType="nvarchar(10)" isNullable="true" friendlyName="Thumb Medium Dimensions">thumb_medium_dimensions</field>
+    <field type="string" dbType="nvarchar(10)" isNullable="true" friendlyName="Thumb Large Dimensions">thumb_large_dimensions</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="true" friendlyName="Resize Status">resize_status</field>
+    <field type="int" dbType="int" isNullable="false" friendlyName="Resize Attempts">resize_attempts</field>
+    <field type="DateTime" dbType="datetimeoffset(0)" isNullable="true" friendlyName="Resize Attempt">resize_attempt_utc</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="true" friendlyName="Encode Identifier">encode_identifier</field>
+    <field type="string" dbType="nvarchar(50)" isNullable="true" friendlyName="Encode Status">encode_status</field>
+    <field type="string" dbType="nvarchar(512)" isNullable="true" friendlyName="Raw Url">raw_url</field>
+    <field type="string" dbType="nvarchar(512)" isNullable="true" friendlyName="Public Url">public_url</field>
+    <field type="string" dbType="nvarchar(512)" isNullable="true" friendlyName="Thumb Url Small">thumb_small_url</field>
+    <field type="string" dbType="nvarchar(512)" isNullable="true" friendlyName="Thumb Url Medium">thumb_medium_url</field>
+    <field type="string" dbType="nvarchar(512)" isNullable="true" friendlyName="Thumb Url Large">thumb_large_url</field>
+    <field type="string" dbType="nvarchar(max)" isNullable="true" friendlyName="Encode Log">encode_log</field>
+    <field type="string" dbType="nvarchar(max)" isNullable="true" friendlyName="Resize Log">resize_log</field>
+    <field type="Dependency" dbType="int" isNullable="false" friendlyName="Dependencies">dependencies</field>
+    <field type="int" dbType="int" isNullable="false" friendlyName="Encode Attempts">encode_attempts</field>
+    <field type="DateTime" dbType="datetimeoffset(0)" isNullable="true" friendlyName="Encode Attempt">encode_attempt_utc</field>
+    <field type="string" dbType="nvarchar(20)" isNullable="true" friendlyName="Resize Mode">resize_mode</field>
+  </item>
+  <enum name="AssetType">
+    <field value="0">Image</field>
+    <field value="1">Video</field>
+  </enum>
+  <enum name="Dependency">
+    <field value="0">None</field>
+  </enum>
+</items>

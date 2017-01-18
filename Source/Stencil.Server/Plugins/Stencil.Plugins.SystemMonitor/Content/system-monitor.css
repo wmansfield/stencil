@@ -1,0 +1,17 @@
+﻿ body {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .message {
+            color: orangered;
+            padding: 10px 0;
+        }
+
+        td {
+            padding: 8px;
+        }
+
+        td {
+            border-top: 1px solid #ccc;
+        }

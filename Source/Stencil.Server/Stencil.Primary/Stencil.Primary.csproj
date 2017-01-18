@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85B98E1E-D38B-46F3-B3DC-E5B601716C40}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Stencil.Primary</RootNamespace>
+    <AssemblyName>Stencil.Primary</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Codeable.Foundation.Common, Version=4.0.39.12204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Codeable.Foundation.Core, Version=4.0.39.12204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Codeable.Foundation.Web.Common, Version=4.0.39.12204, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Web.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Codeable.Foundation.Web.Core, Version=4.0.39.12205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Codeable.Foundation.4.0.39\lib\Codeable.Foundation.Web.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.2.3.3\lib\net45\Elasticsearch.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.2.3.3\lib\net45\Nest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\Direct\IAccountBusiness.cs" />
+    <Compile Include="Business\Direct\IAccountBusiness_Crud.cs">
+      <DependentUpon>IAccountBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Direct\IAssetBusiness.cs" />
+    <Compile Include="Business\Direct\IAssetBusiness_Crud.cs">
+      <DependentUpon>IAssetBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Direct\IGlobalSettingBusiness.cs" />
+    <Compile Include="Business\Direct\IGlobalSettingBusiness_Crud.cs">
+      <DependentUpon>IGlobalSettingBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Direct\Implementation\AccountBusiness.cs" />
+    <Compile Include="Business\Direct\Implementation\AccountBusiness_Crud.cs">
+      <DependentUpon>AccountBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Direct\Implementation\AssetBusiness.cs" />
+    <Compile Include="Business\Direct\Implementation\AssetBusiness_Crud.cs">
+      <DependentUpon>AssetBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Direct\Implementation\BusinessBase.cs" />
+    <Compile Include="Business\Direct\Implementation\BusinessBaseHealth.cs" />
+    <Compile Include="Business\Direct\Implementation\GlobalSettingBusiness.cs" />
+    <Compile Include="Business\Direct\Implementation\GlobalSettingBusiness_Crud.cs">
+      <DependentUpon>GlobalSettingBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Direct\Implementation\InterceptArgs.cs" />
+    <Compile Include="Business\Direct\_DirectExtensions.cs" />
+    <Compile Include="Business\Index\Factory\DocumentNames.cs" />
+    <Compile Include="Business\Index\Factory\IStencilElasticClientFactory.cs" />
+    <Compile Include="Business\Index\Factory\StencilElasticClientFactory.cs" />
+    <Compile Include="Business\Index\Factory\StencilElasticClientFactory_Core.cs">
+      <DependentUpon>StencilElasticClientFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Index\IAccountIndex.cs" />
+    <Compile Include="Business\Index\IAccountIndex_Core.cs">
+      <DependentUpon>IAccountIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Index\IIndexer.cs" />
+    <Compile Include="Business\Index\Implementation\AccountIndex.cs" />
+    <Compile Include="Business\Index\Implementation\AccountIndex_Core.cs">
+      <DependentUpon>AccountIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Index\Implementation\IndexerBase.cs" />
+    <Compile Include="Business\Index\Implementation\IndexerBaseHealth.cs" />
+    <Compile Include="Business\Index\IndexResult.cs" />
+    <Compile Include="Business\Index\_IndexExtensions.cs" />
+    <Compile Include="Business\Integration\DependencyCoordinator_Core.cs">
+      <DependentUpon>DependencyCoordinator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Integration\DependencyWorker.cs" />
+    <Compile Include="Business\Integration\IDependencyCoordinator.cs" />
+    <Compile Include="Business\Integration\DependencyCoordinator.cs" />
+    <Compile Include="Business\Synchronization\Availability.cs" />
+    <Compile Include="Business\Synchronization\IAccountSynchronizer_Core.cs" />
+    <Compile Include="Business\Synchronization\Implementation\AccountSynchronizer_Core.cs" />
+    <Compile Include="Business\Synchronization\Implementation\SynchronizerBase.cs" />
+    <Compile Include="Business\Synchronization\ISynchronizer.cs" />
+    <Compile Include="Daemons\Agents.cs" />
+    <Compile Include="Daemons\WorkerBase.cs" />
+    <Compile Include="Emaling\SimpleEmailer.cs" />
+    <Compile Include="Emaling\EmailFormat.cs" />
+    <Compile Include="Emaling\IEmailer.cs" />
+    <Compile Include="Emaling\_EmailerExtensions.cs" />
+    <Compile Include="Exceptions\FriendlyExceptionHandler.cs" />
+    <Compile Include="Exceptions\FriendlyExceptionHandlerProvider.cs" />
+    <Compile Include="Exceptions\UISecurityException.cs" />
+    <Compile Include="Foundation\StencilBootStrap.cs" />
+    <Compile Include="Foundation\StencilBootStrap_Business.cs">
+      <DependentUpon>StencilBootStrap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Health\Daemons\HealthReportDaemon.cs" />
+    <Compile Include="Health\Daemons\HostedGraphiteTcpClient.cs" />
+    <Compile Include="Health\Exceptions\HealthFriendlyExceptionHandler.cs" />
+    <Compile Include="Health\Exceptions\HealthFriendlyExceptionHandlerProvider.cs" />
+    <Compile Include="Health\Exceptions\HealthSwallowExceptionHandler.cs" />
+    <Compile Include="Health\Exceptions\HealthSwallowExceptionHandlerProvider.cs" />
+    <Compile Include="Health\HealthReporter.cs" />
+    <Compile Include="Health\HealthReportGenerator.cs" />
+    <Compile Include="Health\HealthTrackScope.cs" />
+    <Compile Include="Health\HealthTrackType.cs" />
+    <Compile Include="Health\IHealthExtractor.cs" />
+    <Compile Include="Health\ServerHealthExtractor.cs" />
+    <Compile Include="Health\_HealthExtensions.cs" />
+    <Compile Include="Integration\IProcessImage.cs" />
+    <Compile Include="Mapping\PrimaryMappingProfile.cs" />
+    <Compile Include="Mapping\PrimaryMappingProfile_Core.cs">
+      <DependentUpon>PrimaryMappingProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\_DomainModelExtensions_Core.cs" />
+    <Compile Include="Mapping\_SDKModelExtensions.cs" />
+    <Compile Include="Mapping\_SDKModelExtensions_Core.cs">
+      <DependentUpon>_SDKModelExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrimaryUtillity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StencilAPI.cs" />
+    <Compile Include="StencilAPIDirect.cs" />
+    <Compile Include="StencilAPIIndex.cs" />
+    <Compile Include="StencilAPIIntegration.cs" />
+    <Compile Include="Workers\AccountLoggedInWorker.cs" />
+    <Compile Include="Workers\Models\LoggedInRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Stencil.Common\Stencil.Common.csproj">
+      <Project>{c2ee0d22-4be4-4dde-9f19-997644057d0d}</Project>
+      <Name>Stencil.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stencil.Data.Sql\Stencil.Data.Sql.csproj">
+      <Project>{4c4bb6d3-479c-4ca1-a5e0-6f3a7d5f1fba}</Project>
+      <Name>Stencil.Data.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stencil.Domain\Stencil.Domain.csproj">
+      <Project>{58571501-28b4-4dda-8a63-fc1a4b08f5e3}</Project>
+      <Name>Stencil.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stencil.SDK.Windows\Stencil.SDK.Windows.csproj">
+      <Project>{09e84254-b519-4dac-b02d-d8caa97fd4b9}</Project>
+      <Name>Stencil.SDK.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

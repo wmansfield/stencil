@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="items">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded" minOccurs="1">
+					<xs:element maxOccurs="unbounded" minOccurs="1" name="item">
+						<xs:complexType>
+							<xs:choice maxOccurs="unbounded">
+								<xs:element minOccurs="1" maxOccurs="unbounded" name="field">
+									<xs:complexType mixed="true">
+                    
+										<xs:attribute name="type" type="xs:string" use="required" />
+										<xs:attribute name="dbType" type="xs:string" use="required" />
+                    <xs:attribute name="foreignKey" type="xs:string" use="optional" />
+                    <xs:attribute name="foreignKeyField" type="xs:string" use="optional"/>
+										<xs:attribute name="isNullable" type="xs:boolean" use="required" />
+										<xs:attribute name="friendlyName" type="xs:string" use="required" />
+										<xs:attribute name="uiHideInList" type="xs:boolean" use="optional" />
+                    <xs:attribute name="searchable" type="xs:boolean" use="optional" />
+                    <xs:attribute name="sortable" type="xs:string" use="optional" />
+                    <xs:attribute name="generateTokenIfEmpty" type="xs:boolean" use="optional" />
+                    <xs:attribute name="sdkHidden" type="xs:boolean" use="optional" />
+                    <xs:attribute name="derivedProperty" type="xs:boolean" use="optional" />
+                  </xs:complexType>
+								</xs:element>
+                
+							</xs:choice>
+              
+			        <xs:attribute name="name" type="xs:string" use="required" />
+              <xs:attribute name="friendlyName" type="xs:string" use="required" />
+              <xs:attribute name="uiDisplayField" type="xs:string" use="required" />
+              <xs:attribute name="uiDefaultSort" type="xs:string" use="optional" />
+              
+            </xs:complexType>
+					</xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="enum">
+          </xs:element>
+				</xs:choice>
+			</xs:sequence>
+      
+      <xs:attribute name="projectName" type="xs:string" use="required" />
+      <xs:attribute name="schema" type="xs:string" use="required" />
+      
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

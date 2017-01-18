@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Options xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OutputFolder>C:\projects\socialhaven\stencil\Source\Stencil.Server</OutputFolder>
+  <DataFile>C:\projects\socialhaven\stencil\Generation\XML\Entities.xml</DataFile>
+  <SelectedFiles>
+    <string>C:\projects\socialhaven\stencil\Generation\XSL\Business.xsl</string>
+    <string>C:\projects\socialhaven\stencil\Generation\XSL\Domain.xsl</string>
+    <string>C:\projects\socialhaven\stencil\Generation\XSL\SDK.xsl</string>
+    <string>C:\projects\socialhaven\stencil\Generation\XSL\SQLHelper.xsl</string>
+    <string>C:\projects\socialhaven\stencil\Generation\XSL\UIHelper.xsl</string>
+  </SelectedFiles>
+  <UnSelectedFiles />
+</Options>
