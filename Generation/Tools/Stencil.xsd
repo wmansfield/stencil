@@ -7,30 +7,183 @@
 					<xs:element maxOccurs="unbounded" minOccurs="1" name="item">
 						<xs:complexType>
 							<xs:choice maxOccurs="unbounded">
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="indexfield">
+                  <xs:complexType mixed="true">
+                    <xs:attribute name="type" type="xs:string" use="required">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Type of property in C#</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="computedReferenceField" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The remote field to use when computedBy is set to Extra</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="isNullable" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">In C# will make nullable type if needed.</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="notAnalyzed" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Indicates that this field should not be analyzed and only be searchable by exact match</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="friendlyName" type="xs:string" use="required" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Display name used anytime the item is referenced in a textual context. </xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="computedFrom" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">If provided, the field is calculated by looking at this entity using the computedField and computedBy fields for instructions</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="computedField" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The field on the foreign entity to use in the computedBy. Used with computedFrom and computed fields. </xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="computedBy" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The computation mechanism when computing fields. Currently supports: Null, NotNull, Count, Extra</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                  </xs:complexType>
+                </xs:element>
 								<xs:element minOccurs="1" maxOccurs="unbounded" name="field">
 									<xs:complexType mixed="true">
                     
-										<xs:attribute name="type" type="xs:string" use="required" />
-										<xs:attribute name="dbType" type="xs:string" use="required" />
-                    <xs:attribute name="foreignKey" type="xs:string" use="optional" />
-                    <xs:attribute name="foreignKeyField" type="xs:string" use="optional"/>
-										<xs:attribute name="isNullable" type="xs:boolean" use="required" />
-										<xs:attribute name="friendlyName" type="xs:string" use="required" />
-										<xs:attribute name="uiHideInList" type="xs:boolean" use="optional" />
-                    <xs:attribute name="searchable" type="xs:boolean" use="optional" />
-                    <xs:attribute name="sortable" type="xs:string" use="optional" />
-                    <xs:attribute name="generateTokenIfEmpty" type="xs:boolean" use="optional" />
-                    <xs:attribute name="sdkHidden" type="xs:boolean" use="optional" />
-                    <xs:attribute name="derivedProperty" type="xs:boolean" use="optional" />
+										<xs:attribute name="type" type="xs:string" use="required">
+                      <xs:annotation><xs:documentation xml:lang="en">Type of property in C#</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="dbType" type="xs:string" use="required">
+                      <xs:annotation><xs:documentation xml:lang="en">Type of SQL column</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="foreignKey" type="xs:string" use="optional" >
+                      <xs:annotation><xs:documentation xml:lang="en">The name of the entity that this field is referencing</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="foreignKeyField" type="xs:string" use="optional">
+                      <xs:annotation><xs:documentation xml:lang="en">The column to reference on the foreign table</xs:documentation></xs:annotation>
+                    </xs:attribute>
+										<xs:attribute name="isNullable" type="xs:boolean" use="required" >
+                      <xs:annotation><xs:documentation xml:lang="en">In sql creates the column as nullable. In C# will make nullable type if needed.</xs:documentation></xs:annotation>
+                    </xs:attribute>
+										<xs:attribute name="friendlyName" type="xs:string" use="required" >
+                      <xs:annotation><xs:documentation xml:lang="en">Display name used anytime the item is referenced in a textual context. Warning: ForeignKeys use this name as a method name, so no spaces or special characters</xs:documentation></xs:annotation>
+                    </xs:attribute>
+										<xs:attribute name="uiListHidden" type="xs:boolean" use="optional" >
+                      <xs:annotation><xs:documentation xml:lang="en">UIHelpers use this to prevent this field from showing in the list view.</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="uiEditHidden" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">UIHelpers use this to prevent this field from showing in the edit view.</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="uiCreateHidden" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">UIHelpers use this to prevent this field from showing in the edit view.</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="searchable" type="xs:boolean" use="optional" >
+                      <xs:annotation><xs:documentation xml:lang="en">Sets whether this field should be included in general "Find" mechanisms</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="sortable" type="xs:string" use="optional" >
+                      <xs:annotation><xs:documentation xml:lang="en">Sets whether this field will generate a special sortable index suffix in ElasticSearch that supports sorting. ie: field_name.sort </xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="sdkHidden" type="xs:boolean" use="optional" >
+                      <xs:annotation><xs:documentation xml:lang="en">Prevents the field from being added to the SDK model</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="derivedProperty" type="xs:string" use="optional" >
+                      <xs:annotation><xs:documentation xml:lang="en">Created the property as a Derived property on the domain model. Used as an alternative to attached properties. Indicates the property will not always be populated.</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="facadeMapping" type="xs:string" use="optional" >
+                      <xs:annotation><xs:documentation xml:lang="en">You with to customize the mapping between SDK and Domain. [useful for ui only or special payload processing]</xs:documentation></xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="indexExact" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Makes the field not be analyzed by elastic seach. Can only be matched by exact term.</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="generateTokenIfEmpty" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Reserved for Future Use</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="iInvalidateforeignKey" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">If true, when the current entity changes, it will invalidate the referenced ForeignKey. Note: only works on foreignKey fields</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="foreignKeyInvalidatesMe" type="xs:boolean" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">If true, when the foreign entity changes, it will invalidate this entity. Note: only works on foreignKey fields</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+
+                    <xs:attribute name="computedFrom" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">If provided, the field is calculated by looking at this entity using the computedField and computedBy fields for instructions</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="computedField" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The field on the foreign entity to use in the computedBy. Used with computedFrom and computed fields. </xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="computedBy" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The computation mechanism when computing fields. Currently supports: Null, NotNull, Count, Extra</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="computedReferenceField" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The remote field to use when computedBy is set to Extra</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="ukGroup" type="xs:string" use="optional" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">A sql unique key is generated for every field in this entity that matches the name provided.</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
                   </xs:complexType>
 								</xs:element>
                 
 							</xs:choice>
-              
-			        <xs:attribute name="name" type="xs:string" use="required" />
-              <xs:attribute name="friendlyName" type="xs:string" use="required" />
-              <xs:attribute name="uiDisplayField" type="xs:string" use="required" />
-              <xs:attribute name="uiDefaultSort" type="xs:string" use="optional" />
+
+
+              <xs:attribute name="indexForSearchable" type="xs:boolean" use="optional" >
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">When the item is indexed, it will ensure that the entity has merged into the index and is available for searching.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+			        <xs:attribute name="name" type="xs:string" use="required" >
+                <xs:annotation><xs:documentation xml:lang="en">The name of the entity, represents the C# class name and table name</xs:documentation></xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="friendlyName" type="xs:string" use="required" >
+                <xs:annotation><xs:documentation xml:lang="en">Display name used anytime the item is referenced in a textual context</xs:documentation></xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="uiDisplayField" type="xs:string" use="optional" >
+                <xs:annotation><xs:documentation xml:lang="en">The field whose value is shown in a UI that only supports a single field</xs:documentation></xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="uiDefaultSort" type="xs:string" use="optional" >
+                <xs:annotation><xs:documentation xml:lang="en">The field to sort by when not provided. Note: Not used in every capacity, UI is expected to always provide their preference.</xs:documentation></xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="sdkBase" type="xs:boolean" use="optional">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Creates a base class to allow for custom properties</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="useIndex" type="xs:boolean" use="optional">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Whether this entity support index synchronization.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="indexPriority" type="xs:integer" use="optional">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">The indexing priority that the synchronizers will use to synchronize data. Important for nested or dependant objects.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
               
             </xs:complexType>
 					</xs:element>
@@ -39,8 +192,17 @@
 				</xs:choice>
 			</xs:sequence>
       
-      <xs:attribute name="projectName" type="xs:string" use="required" />
-      <xs:attribute name="schema" type="xs:string" use="required" />
+      <xs:attribute name="projectName" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name used in all file paths and namespaces</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="schema" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">SQL Schema prefix NOT FULLY RESPECTED!</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      
       
 		</xs:complexType>
 	</xs:element>
