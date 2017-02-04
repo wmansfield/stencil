@@ -1118,9 +1118,9 @@ namespace <xsl:value-of select="items/@projectName"/>.Primary.Business.Integrati
                 </xsl:for-each>
                 <xsl:for-each select="field[@iInvalidateforeignKey='true']">
                 <xsl:value-of select="../@name"/> item = this.API.Direct.<xsl:value-of select="../@name"/>s.GetById(<xsl:value-of select="$currentField"/>);
-                if (item != null)
+                if (item != null<xsl:if test="@isNullable='true'"> &amp;&amp; item.<xsl:value-of select="text()"/>.HasValue</xsl:if>)
                 {
-                    this.API.Direct.<xsl:value-of select="@foreignKey"/>s.Invalidate(item.<xsl:value-of select="text()"/>, "<xsl:value-of select="../@name"/> changed");
+                    this.API.Direct.<xsl:value-of select="@foreignKey"/>s.Invalidate(item.<xsl:value-of select="text()"/><xsl:if test="@isNullable='true'">.Value</xsl:if>, "<xsl:value-of select="../@name"/> changed");
                 }
                 </xsl:for-each>
                 <xsl:if test="count(../item/field[@foreignKey=$currentName and @foreignKeyInvalidatesMe='true'])>0 or count(field[@iInvalidateforeignKey='true'])>0">
