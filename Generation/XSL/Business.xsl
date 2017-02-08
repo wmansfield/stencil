@@ -1165,7 +1165,7 @@ namespace <xsl:value-of select="items/@projectName"/>.Data.Sql
 
 <xsl:for-each select="items/item[@useIndex='true']">
 
-'''[STARTFILE:<xsl:value-of select="../@projectName"/>.Primary\Business\Index\Implementation\<xsl:value-of select="@name"/>Index_Core.cs]using Codeable.Foundation.Common;
+'''[STARTFILE:<xsl:value-of select="../@projectName"/>.Primary\Business\Index\I<xsl:value-of select="@name"/>Index_Core.cs]using Codeable.Foundation.Common;
 using <xsl:value-of select="../@projectName"/>.SDK.Models;
 using <xsl:value-of select="../@projectName"/>.SDK;
 using System;
