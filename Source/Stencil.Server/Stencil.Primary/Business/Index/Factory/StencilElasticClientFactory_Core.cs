@@ -72,6 +72,33 @@ namespace Stencil.Primary.Business.Index
                     )
                 )
             ));
+            indexer.Mappings(mp => mp.Map<sdk.Post>(DocumentNames.Post, p => p
+                .AutoMap()
+                .Properties(props => props
+                    .String(s => s
+                        .Name(n => n.post_id)
+                        .Index(FieldIndexOption.NotAnalyzed)
+                    ).String(s => s
+                        .Name(n => n.account_id)
+                        .Index(FieldIndexOption.NotAnalyzed)
+                    )
+                )
+            ));
+            indexer.Mappings(mp => mp.Map<sdk.Remark>(DocumentNames.Remark, p => p
+                .AutoMap()
+                .Properties(props => props
+                    .String(s => s
+                        .Name(n => n.remark_id)
+                        .Index(FieldIndexOption.NotAnalyzed)
+                    ).String(s => s
+                        .Name(n => n.post_id)
+                        .Index(FieldIndexOption.NotAnalyzed)
+                    ).String(s => s
+                        .Name(n => n.account_id)
+                        .Index(FieldIndexOption.NotAnalyzed)
+                    )
+                )
+            ));
             
         }
     }

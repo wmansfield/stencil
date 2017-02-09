@@ -12,6 +12,8 @@ namespace Stencil.Primary.Business.Integration
         void GlobalSettingInvalidated(Dependency affectedDependencies, Guid global_setting_id);
         void AccountInvalidated(Dependency affectedDependencies, Guid account_id);
         void AssetInvalidated(Dependency affectedDependencies, Guid asset_id);
+        void PostInvalidated(Dependency affectedDependencies, Guid post_id);
+        void RemarkInvalidated(Dependency affectedDependencies, Guid remark_id);
         
     }
 }

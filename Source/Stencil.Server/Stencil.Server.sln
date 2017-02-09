@@ -45,6 +45,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stencil.Plugins.AzurePush",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stencil.Plugins.Amazon", "Plugins\Stencil.Plugins.Amazon\Stencil.Plugins.Amazon.csproj", "{7552B994-8754-4CEE-B8D2-609263716036}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Generation", "_Generation", "{CA769860-4179-4375-90D7-32752EAF31B1}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Generation\XML\Entities.xml = ..\..\Generation\XML\Entities.xml
+		..\..\Generation\Tools\Stencil.xsd = ..\..\Generation\Tools\Stencil.xsd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Stencil.SDK.Shared\Stencil.SDK.Shared.projitems*{09e84254-b519-4dac-b02d-d8caa97fd4b9}*SharedItemsImports = 4

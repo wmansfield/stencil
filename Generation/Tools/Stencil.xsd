@@ -54,6 +54,7 @@
 								<xs:element minOccurs="1" maxOccurs="unbounded" name="field">
 									<xs:complexType mixed="true">
                     
+                    
 										<xs:attribute name="type" type="xs:string" use="required">
                       <xs:annotation><xs:documentation xml:lang="en">Type of property in C#</xs:documentation></xs:annotation>
                     </xs:attribute>
@@ -166,6 +167,16 @@
               <xs:attribute name="uiDisplayField" type="xs:string" use="optional" >
                 <xs:annotation><xs:documentation xml:lang="en">The field whose value is shown in a UI that only supports a single field</xs:documentation></xs:annotation>
               </xs:attribute>
+              <xs:attribute name="userSpecificData" type="xs:string" use="optional" >
+                <xs:annotation><xs:documentation xml:lang="en">If provided, all index methods support post-processing with the supplied user information. [Note: you must process this yourself]</xs:documentation></xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="trackUpdates" type="xs:string" use="optional" >
+                <xs:annotation><xs:documentation xml:lang="en">When not using an index (why aren't you?) this adds update tracking to the table</xs:documentation></xs:annotation>
+              </xs:attribute>
+              
+              <xs:attribute name="uiDefaultSortDescending" type="xs:string" use="optional" >
+                <xs:annotation><xs:documentation xml:lang="en">Whether or not the sort will default to descending.</xs:documentation></xs:annotation>
+              </xs:attribute>
               <xs:attribute name="uiDefaultSort" type="xs:string" use="optional" >
                 <xs:annotation><xs:documentation xml:lang="en">The field to sort by when not provided. Note: Not used in every capacity, UI is expected to always provide their preference.</xs:documentation></xs:annotation>
               </xs:attribute>
@@ -184,6 +195,8 @@
                   <xs:documentation xml:lang="en">The indexing priority that the synchronizers will use to synchronize data. Important for nested or dependant objects.</xs:documentation>
                 </xs:annotation>
               </xs:attribute>
+              
+              
               
             </xs:complexType>
 					</xs:element>

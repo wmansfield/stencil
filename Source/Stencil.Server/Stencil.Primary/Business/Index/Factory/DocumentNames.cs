@@ -9,5 +9,7 @@ namespace Stencil.Primary.Business.Index
     public sealed class DocumentNames
     {
         public static readonly string Account = "accounts";
+        public static readonly string Post = "posts";
+        public static readonly string Remark = "remarks";
     }
 }

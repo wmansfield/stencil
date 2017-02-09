@@ -11,6 +11,8 @@ namespace Stencil.SDK
         public GlobalSettingEndpoint GlobalSetting;
         public AccountEndpoint Account;
         public AssetEndpoint Asset;
+        public PostEndpoint Post;
+        public RemarkEndpoint Remark;
         
 
         protected virtual void ConstructCoreEndpoints()
@@ -18,6 +20,8 @@ namespace Stencil.SDK
             this.GlobalSetting = new GlobalSettingEndpoint(this);
             this.Account = new AccountEndpoint(this);
             this.Asset = new AssetEndpoint(this);
+            this.Post = new PostEndpoint(this);
+            this.Remark = new RemarkEndpoint(this);
             
         }   
     }

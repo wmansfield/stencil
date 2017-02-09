@@ -1,0 +1,111 @@
+Step 0 - Services
+==================
+SQL Server: you need a sql server with an empty database that you can access.
+ElasticSearch: you need an elastic search instance running and accessible via rest. [i use qbox.io]
+
+Be sure you
+Step 1 - Update Configuration
+==============================
+Project: Stencil.Website
+	Web.config
+		-> Update <connectionStrings> to match your database
+		-> Update <appSetting key="Stencil-ES-HOST"> to  match your elastic search host
+		-> Update <appSetting key="Stencil-ES-Replica"> to match your elaastic search host allowance
+
+Project: Stencil.Data.Sql
+	App.config
+		-> Update <connectionStrings> to match your database (note it is entity framework connection, so scroll to far right to see connectionstring)
+
+Push Notifications
+	Configure Azure Push and supply credentials in <appSetting key="Stencil-PUSH-HUB"> and <appSetting key="Stencil-PUSH-CONN">
+	Note: Beyond the scope of this tutorial
+
+
+Step 2 - Design your data
+==========================
+Update Entities.xml to match the schema you want.
+
+Run the GenTool
+
+Execute the create_helper.sql against your database.
+
+Open StencilModel.edmx (Stencil.Data.Sql project)
+Update Model From Database including all tables and stored procedures
+
+Rename all tables in the Edmx to have prefix db
+
+
+Step 3 - Include generated files
+=================================
+For the following projects, show all files in the folder structure and include any generated files that are not included:
+	Stencil.Domain [Domain]
+	Stencil.Primary [Business+children]
+	Stencil.SDK.Shared [Endpoints, Model]
+
+
+Step 4 - Decide on document names
+==================================
+Edit DocumentNames.cs [Stencil.Primary\Business\Index\Factory\DocumentNames]
+Add the name of the ElasticSearch Index you want for each Entity.
+The build will bark about this, so you don't have to worry about forgetting.
+[this is done to allow you to manage elasticsearch naming, it can become verbose, do as you please]
+
+
+Step 5 - Build the solution
+============================
+Build all projects in the solution. You will need DuoCode installed to build the Web SDK.
+If you encounter any bugs, spend a moment diagnosing the error. If you fail, email me.
+
+Step 6 - Run and Seed
+======================
+Edit the boostrap file to use the login information you want for your first user
+Stencil.Plugins.SystemMonitor\Controllers\BootstrapController.cs
+[edit the email/password fields]
+
+Rebuild the whole solution.
+Seriously, be sure you use the "Rebuild" on all of the projects.
+
+Run the Stencil.Website project [right click view in browser] [you can run debug as well, but why bother?]
+
+You should see "Hi. Standard asp.net stuff works."
+This indicates that everything is compiling fine and that... asp.net works.
+
+Navigate to  /bootstrap  [http://localhost:4328/bootstrap]
+If it says "Created new user"
+Then it has created your user!
+If not, an error has occurred, debug it!
+
+
+Step 7 - Bootstrap Aurelia
+=============================
+You don't have to use aurelia, you can use whatever front end html/js framework you like.
+The javascript sdk file is generated and exported into the aurelia folder structure, but it can be used by any JS framework.
+
+Install NodeJS if you don't already have it. [yes, all FE devs use this as their tooling]
+Open a command prompt
+Change the path to the aurelia folder [Stencil.Server\Stencil.Website\aurelia]
+run: npm install 
+[This will install the aurelia tooling that is used 'on' the js app]
+run: npm install -g gulp
+[This will make sure you have gulp installed]
+run: jspm install
+[this will install js dependencies that are used 'in' the js app]
+run: gulp build
+[This will build the aurelia project]
+
+
+Browse to /aurelia [http://localhost:4328/aurelia]
+You should see a login form.
+[if you only see a spinning circle, check the browser console for errors]
+
+Log in with the user account you created in the previous step.
+You should see an alert announcing your name
+YOU DID IT!
+You have bootstrapped stencil.
+Drink a beer.  With me.
+
+
+
+Addendum
+========
+if you need an sdkbase class, remember it has to be created by you, codegen util will never create it.

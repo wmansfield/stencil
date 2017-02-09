@@ -54,6 +54,7 @@ export class Login {
             sdk.Auth.LoginAsync(payload)
                 .done(function (data) {
                     self.processing = false;
+                    self.app.updateUser(data.item);
                     self.showNotice(`Hello ${data.item.first_name}`);
                 })
                 .error(function (data) {

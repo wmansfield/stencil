@@ -60,6 +60,34 @@ namespace Stencil.Primary.Business.Integration
                 
             });
         }
+        public virtual void PostInvalidated(Dependency affectedDependencies, Guid post_id)
+        {
+            base.ExecuteMethod("PostInvalidated", delegate ()
+            {
+                DependencyWorker<Post>.EnqueueRequest(this.IFoundation, affectedDependencies, post_id, this.ProcessPostInvalidation);
+            });
+        }
+        protected virtual void ProcessPostInvalidation(Dependency dependencies, Guid post_id)
+        {
+            base.ExecuteMethod("ProcessPostInvalidation", delegate ()
+            {
+                
+            });
+        }
+        public virtual void RemarkInvalidated(Dependency affectedDependencies, Guid remark_id)
+        {
+            base.ExecuteMethod("RemarkInvalidated", delegate ()
+            {
+                DependencyWorker<Remark>.EnqueueRequest(this.IFoundation, affectedDependencies, remark_id, this.ProcessRemarkInvalidation);
+            });
+        }
+        protected virtual void ProcessRemarkInvalidation(Dependency dependencies, Guid remark_id)
+        {
+            base.ExecuteMethod("ProcessRemarkInvalidation", delegate ()
+            {
+                
+            });
+        }
         
     }
 }

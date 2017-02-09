@@ -89,6 +89,54 @@ CREATE TABLE [dbo].[Asset] (
 GO
 
 
+CREATE TABLE [dbo].[Post] (
+	 [post_id] uniqueidentifier NOT NULL
+    ,[account_id] uniqueidentifier NOT NULL
+    ,[stamp_utc] datetimeoffset(0) NOT NULL
+    ,[body] nvarchar(max) NULL
+    ,[remark_total] int NOT NULL
+    ,[created_utc] DATETIMEOFFSET(0) NOT NULL
+    ,[updated_utc] DATETIMEOFFSET(0) NOT NULL
+    ,[deleted_utc] DATETIMEOFFSET(0) NULL
+	,[sync_hydrate_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_success_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_invalid_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_attempt_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_agent] NVARCHAR(50) NULL
+    ,[sync_log] NVARCHAR(MAX) NULL
+  ,CONSTRAINT [PK_Post] PRIMARY KEY CLUSTERED 
+  (
+	  [post_id] ASC
+  )
+)
+
+GO
+
+
+CREATE TABLE [dbo].[Remark] (
+	 [remark_id] uniqueidentifier NOT NULL
+    ,[post_id] uniqueidentifier NOT NULL
+    ,[account_id] uniqueidentifier NOT NULL
+    ,[stamp_utc] datetimeoffset(0) NOT NULL
+    ,[text] nvarchar(max) NULL
+    ,[created_utc] DATETIMEOFFSET(0) NOT NULL
+    ,[updated_utc] DATETIMEOFFSET(0) NOT NULL
+    ,[deleted_utc] DATETIMEOFFSET(0) NULL
+	,[sync_hydrate_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_success_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_invalid_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_attempt_utc] DATETIMEOFFSET(0) NULL
+    ,[sync_agent] NVARCHAR(50) NULL
+    ,[sync_log] NVARCHAR(MAX) NULL
+  ,CONSTRAINT [PK_Remark] PRIMARY KEY CLUSTERED 
+  (
+	  [remark_id] ASC
+  )
+)
+
+GO
+
+
 -- </Tables> --------------------------------------------------------------------
 
 
@@ -99,6 +147,10 @@ AS
 
    UPDATE [dbo].[Account] SET [sync_success_utc] = NULL, [sync_log] = 'invalidateall'
 
+   UPDATE [dbo].[Post] SET [sync_success_utc] = NULL, [sync_log] = 'invalidateall'
+
+   UPDATE [dbo].[Remark] SET [sync_success_utc] = NULL, [sync_log] = 'invalidateall'
+
 
 GO
 
@@ -107,6 +159,10 @@ AS
 
    UPDATE [dbo].[Account] SET [sync_hydrate_utc] = NULL
 
+   UPDATE [dbo].[Post] SET [sync_hydrate_utc] = NULL
+
+   UPDATE [dbo].[Remark] SET [sync_hydrate_utc] = NULL
+
 
 GO
 
@@ -114,6 +170,7 @@ GO
 CREATE PROCEDURE [dbo].[spIndex_InvalidateAggregates]
 AS
 
+	UPDATE [dbo].[Post] SET [sync_success_utc] = NULL
 
 GO
 
@@ -121,6 +178,7 @@ GO
 CREATE PROCEDURE [dbo].[spIndexHydrate_InvalidateAggregates]
 AS
 
+	UPDATE [dbo].[Post] SET [sync_hydrate_utc] = NULL
 
 GO
 
@@ -130,6 +188,10 @@ AS
    SELECT 'Pending Items' as [Pending Items]
 
       ,(select count(1) from [dbo].[Account] where  [sync_success_utc] IS NULL) as [Account - 10]
+
+      ,(select count(1) from [dbo].[Post] where  [sync_success_utc] IS NULL) as [Post - 20]
+
+      ,(select count(1) from [dbo].[Remark] where  [sync_success_utc] IS NULL) as [Remark - 30]
 
          
 
@@ -141,6 +203,10 @@ AS
    SELECT 'Pending Items' as [Pending Items]
 
       ,(select count(1) from [dbo].[Account] where  [sync_hydrate_utc] IS NULL) as [Account - 10]
+
+      ,(select count(1) from [dbo].[Post] where  [sync_hydrate_utc] IS NULL) as [Post - 20]
+
+      ,(select count(1) from [dbo].[Remark] where  [sync_hydrate_utc] IS NULL) as [Remark - 30]
 
          
 
@@ -238,10 +304,200 @@ END
 
 GO
 
+CREATE PROCEDURE [dbo].[spPost_SyncGetInvalid]
+	@allowableSecondsToProcessIndex int
+    ,@sync_agent nvarchar(50)
+AS
+  SELECT [post_id]
+  FROM [dbo].[Post]
+  WHERE [sync_success_utc] IS NULL OR [deleted_utc] > [sync_success_utc]  OR [updated_utc] > [sync_success_utc]
+  AND ISNULL([sync_agent],'') = ISNULL(@sync_agent,'')
+  ORDER BY  -- oldest attempt, not attempted, failed -> then by change date  
+	CASE WHEN NOT [sync_attempt_utc] IS NULL AND DATEDIFF(second,[sync_attempt_utc], GETUTCDATE()) > @allowableSecondsToProcessIndex  
+			THEN 0 -- oldest in queue
+		WHEN [sync_attempt_utc] IS NULL 
+			THEN 1  -- synch is null , freshly invalidated 
+		ELSE  2-- recently failed
+	END asc
+	,[sync_invalid_utc] asc
+
+GO
+
+CREATE PROCEDURE [dbo].[spPost_SyncUpdate]  
+	 @post_id uniqueidentifier,  
+	 @sync_success bit,  
+	 @sync_success_utc datetimeoffset(0),  
+	 @sync_log nvarchar(MAX)  
+AS  
+BEGIN 
+	IF (@sync_success = 1)   
+	BEGIN  
+		-- ON SUCCESSFUL, SET SYNCH DATE
+		UPDATE [dbo].[Post]
+		SET [sync_success_utc] = @sync_success_utc
+			,[sync_attempt_utc] = NULL
+			,[sync_invalid_utc] = NULL
+			,[sync_log] = @sync_log
+		WHERE [post_id] = @post_id
+		AND [sync_success_utc] IS NULL
+		AND (([sync_invalid_utc] IS NULL) OR ([sync_invalid_utc] <= @sync_success_utc))
+	END
+	ELSE
+	BEGIN
+		-- ON FAILED, SET SYNCH "ATTEMPT" DATE
+		UPDATE [dbo].[Post]
+		SET [sync_attempt_utc] = GETUTCDATE()
+			,[sync_log] = @sync_log
+		WHERE [post_id] = @post_id
+		AND [sync_success_utc] IS NULL
+	END  
+END
+
+GO
+
+CREATE PROCEDURE [dbo].[spPost_HydrateSyncGetInvalid]
+	@allowableSecondsToProcessIndex int
+    ,@sync_agent nvarchar(50) -- not used yet
+AS
+  SELECT [post_id]
+  FROM [dbo].[Post]
+  WHERE [sync_hydrate_utc] IS NULL
+  ORDER BY [sync_invalid_utc] asc
+
+GO
+
+CREATE PROCEDURE [dbo].[spPost_HydrateSyncUpdate]  
+	 @post_id uniqueidentifier,  
+	 @sync_success bit,  
+	 @sync_hydrate_utc datetimeoffset(0),  
+	 @sync_log nvarchar(MAX)   -- not used yet
+AS  
+BEGIN 
+	IF (@sync_success = 1)   
+	BEGIN  
+		-- ON SUCCESSFUL, SET SYNC DATE
+		UPDATE [dbo].[Post]
+		SET [sync_hydrate_utc] = @sync_hydrate_utc
+		WHERE [post_id] = @post_id
+		AND [sync_hydrate_utc] IS NULL
+	END
+	ELSE
+	BEGIN
+		-- ON FAILED, ADD TO LOG
+		UPDATE [dbo].[Post]
+		SET [sync_log] = @sync_log
+		WHERE [post_id] = @post_id
+		AND [sync_hydrate_utc] IS NULL
+	END  
+END
+
+GO
+
+CREATE PROCEDURE [dbo].[spRemark_SyncGetInvalid]
+	@allowableSecondsToProcessIndex int
+    ,@sync_agent nvarchar(50)
+AS
+  SELECT [remark_id]
+  FROM [dbo].[Remark]
+  WHERE [sync_success_utc] IS NULL OR [deleted_utc] > [sync_success_utc]  OR [updated_utc] > [sync_success_utc]
+  AND ISNULL([sync_agent],'') = ISNULL(@sync_agent,'')
+  ORDER BY  -- oldest attempt, not attempted, failed -> then by change date  
+	CASE WHEN NOT [sync_attempt_utc] IS NULL AND DATEDIFF(second,[sync_attempt_utc], GETUTCDATE()) > @allowableSecondsToProcessIndex  
+			THEN 0 -- oldest in queue
+		WHEN [sync_attempt_utc] IS NULL 
+			THEN 1  -- synch is null , freshly invalidated 
+		ELSE  2-- recently failed
+	END asc
+	,[sync_invalid_utc] asc
+
+GO
+
+CREATE PROCEDURE [dbo].[spRemark_SyncUpdate]  
+	 @remark_id uniqueidentifier,  
+	 @sync_success bit,  
+	 @sync_success_utc datetimeoffset(0),  
+	 @sync_log nvarchar(MAX)  
+AS  
+BEGIN 
+	IF (@sync_success = 1)   
+	BEGIN  
+		-- ON SUCCESSFUL, SET SYNCH DATE
+		UPDATE [dbo].[Remark]
+		SET [sync_success_utc] = @sync_success_utc
+			,[sync_attempt_utc] = NULL
+			,[sync_invalid_utc] = NULL
+			,[sync_log] = @sync_log
+		WHERE [remark_id] = @remark_id
+		AND [sync_success_utc] IS NULL
+		AND (([sync_invalid_utc] IS NULL) OR ([sync_invalid_utc] <= @sync_success_utc))
+	END
+	ELSE
+	BEGIN
+		-- ON FAILED, SET SYNCH "ATTEMPT" DATE
+		UPDATE [dbo].[Remark]
+		SET [sync_attempt_utc] = GETUTCDATE()
+			,[sync_log] = @sync_log
+		WHERE [remark_id] = @remark_id
+		AND [sync_success_utc] IS NULL
+	END  
+END
+
+GO
+
+CREATE PROCEDURE [dbo].[spRemark_HydrateSyncGetInvalid]
+	@allowableSecondsToProcessIndex int
+    ,@sync_agent nvarchar(50) -- not used yet
+AS
+  SELECT [remark_id]
+  FROM [dbo].[Remark]
+  WHERE [sync_hydrate_utc] IS NULL
+  ORDER BY [sync_invalid_utc] asc
+
+GO
+
+CREATE PROCEDURE [dbo].[spRemark_HydrateSyncUpdate]  
+	 @remark_id uniqueidentifier,  
+	 @sync_success bit,  
+	 @sync_hydrate_utc datetimeoffset(0),  
+	 @sync_log nvarchar(MAX)   -- not used yet
+AS  
+BEGIN 
+	IF (@sync_success = 1)   
+	BEGIN  
+		-- ON SUCCESSFUL, SET SYNC DATE
+		UPDATE [dbo].[Remark]
+		SET [sync_hydrate_utc] = @sync_hydrate_utc
+		WHERE [remark_id] = @remark_id
+		AND [sync_hydrate_utc] IS NULL
+	END
+	ELSE
+	BEGIN
+		-- ON FAILED, ADD TO LOG
+		UPDATE [dbo].[Remark]
+		SET [sync_log] = @sync_log
+		WHERE [remark_id] = @remark_id
+		AND [sync_hydrate_utc] IS NULL
+	END  
+END
+
+GO
+
 -- <Procedures> --------------------------------------------------------------------
 
 
 -- <Foreign Keys> --------------------------------------------------------------------
+
+ALTER TABLE [dbo].[Remark] WITH CHECK ADD  CONSTRAINT [FK_Remark_Post_post_id] FOREIGN KEY([post_id])
+REFERENCES [dbo].[Post] ([post_id])
+GO
+
+ALTER TABLE [dbo].[Remark] WITH CHECK ADD  CONSTRAINT [FK_Remark_Account_account_id] FOREIGN KEY([account_id])
+REFERENCES [dbo].[Account] ([account_id])
+GO
+
+ALTER TABLE [dbo].[Post] WITH CHECK ADD  CONSTRAINT [FK_Post_Account_account_id] FOREIGN KEY([account_id])
+REFERENCES [dbo].[Account] ([account_id])
+GO
 
 -- </Foreign Keys> --------------------------------------------------------------------
 

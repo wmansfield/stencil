@@ -52,6 +52,21 @@
     <field type="DateTime" dbType="datetimeoffset(0)" isNullable="true" friendlyName="Encode Attempt">encode_attempt_utc</field>
     <field type="string" dbType="nvarchar(20)" isNullable="true" friendlyName="Resize Mode">resize_mode</field>
   </item>
+  <item name="Post" friendlyName="Post" useIndex="true" sdkBase="true" indexPriority="20" indexForSearchable="true" uiDefaultSort="stamp_utc" uiDefaultSortDescending="true" userSpecificData="account_id" >
+    <field type="Guid" dbType="uniqueidentifier" isNullable="false" friendlyName="Post ID">post_id</field>
+    <field type="Guid" dbType="uniqueidentifier" foreignKey="Account" foreignKeyField="account_id" isNullable="false" friendlyName="Account">account_id</field>
+    <field type="DateTime" dbType="datetimeoffset(0)" isNullable="false" friendlyName="Stamp">stamp_utc</field>
+    <field type="string" dbType="nvarchar(max)" isNullable="true" searchable="true" friendlyName="Body">body</field>
+    <field type="int" dbType="int" isNullable="false" computedFrom="Remark" computedField="remark_id" computedBy="Count" friendlyName="Remark Total">remark_total</field>
+    <indexfield type="int" isNullable="false" friendlyName="Account Name">account_name</indexfield>
+  </item>
+  <item name="Remark" friendlyName="Remark" useIndex="true" indexPriority="30" indexForSearchable="true" sdkBase="true" uiDefaultSort="stamp_utc" uiDefaultSortDescending="true" >
+    <field type="Guid" dbType="uniqueidentifier" isNullable="false" friendlyName="Remark">remark_id</field>
+    <field type="Guid" dbType="uniqueidentifier" foreignKey="Post" foreignKeyField="post_id" iInvalidateforeignKey="manual" isNullable="false" friendlyName="Post">post_id</field>
+    <field type="Guid" dbType="uniqueidentifier" foreignKey="Account" foreignKeyField="account_id" isNullable="false" friendlyName="Account">account_id</field>
+    <field type="DateTime" dbType="datetimeoffset(0)" isNullable="false" friendlyName="Stamp">stamp_utc</field>
+    <field type="string" dbType="nvarchar(max)" isNullable="true" searchable="true" friendlyName="Text">text</field>
+  </item>
   <enum name="AssetType">
     <field value="0">Image</field>
     <field value="1">Video</field>

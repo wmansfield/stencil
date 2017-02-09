@@ -6,5 +6,81 @@
 
   <div class="page-host">
     <router-view></router-view>
+
+    <div id="appNoticeModal" class="modal modal-styled">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">${notice.title}</h3>
+                    </div>
+                    <!-- /.modal-header -->
+
+                    <div class="modal-body">
+                        <p>${notice.message}</p>
+                    </div>
+                    <!-- /.modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" click.delegate="onNoticeButtonClicked(1)">${notice.button_text}</button>
+                    </div>
+                    <!-- /.modal-footer -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        
+        <div id="appConfirmModal" class="modal modal-styled">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">${confirmnotice.title}</h3>
+                    </div>
+                    <!-- /.modal-header -->
+
+                    <div class="modal-body">
+                        <p>${confirmnotice.message}</p>
+                    </div>
+                    <!-- /.modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" click.delegate="onConfirmButtonClicked(0)">${confirmnotice.negative_text}</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" click.delegate="onConfirmButtonClicked(1)">${confirmnotice.positive_text}</button>
+                    </div>
+                    <!-- /.modal-footer -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div id="appErrorModal" class="modal modal-styled modal-error">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">${error.title}</h3>
+                    </div>
+                    <!-- /.modal-header -->
+
+                    <div class="modal-body">
+                        <p>${error.message}</p>
+                    </div>
+                    <!-- /.modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" click.delegate="onErrorButtonClicked(1)">${error.button_text}</button>
+                    </div>
+                    <!-- /.modal-footer -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
   </div>
 </template>

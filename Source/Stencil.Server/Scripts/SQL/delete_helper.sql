@@ -2,6 +2,16 @@
 
 -- <Foreign Keys> --------------------------------------------------------------------
 
+ALTER TABLE [dbo].[Remark] DROP  [FK_Remark_Post_post_id]
+
+ALTER TABLE [dbo].[Remark] DROP  [FK_Remark_Account_account_id]
+
+GO
+
+ALTER TABLE [dbo].[Post] DROP  [FK_Post_Account_account_id]
+
+GO
+
 GO
 
 GO
@@ -25,6 +35,12 @@ GO
 
 
 -- <Tables> --------------------------------------------------------------------
+
+DROP TABLE [dbo].[Remark]
+GO
+
+DROP TABLE [dbo].[Post]
+GO
 
 DROP TABLE [dbo].[Asset]
 GO
@@ -50,6 +66,36 @@ DROP PROCEDURE [dbo].[spAccount_HydrateSyncUpdate]
 GO
 
 DROP PROCEDURE [dbo].[spAccount_HydrateSyncGetInvalid]
+GO
+
+
+
+
+DROP PROCEDURE [dbo].[spPost_SyncUpdate]
+GO
+
+DROP PROCEDURE [dbo].[spPost_SyncGetInvalid]
+GO
+
+DROP PROCEDURE [dbo].[spPost_HydrateSyncUpdate]
+GO
+
+DROP PROCEDURE [dbo].[spPost_HydrateSyncGetInvalid]
+GO
+
+
+
+
+DROP PROCEDURE [dbo].[spRemark_SyncUpdate]
+GO
+
+DROP PROCEDURE [dbo].[spRemark_SyncGetInvalid]
+GO
+
+DROP PROCEDURE [dbo].[spRemark_HydrateSyncUpdate]
+GO
+
+DROP PROCEDURE [dbo].[spRemark_HydrateSyncGetInvalid]
 GO
 
 

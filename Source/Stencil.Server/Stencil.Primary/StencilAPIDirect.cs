@@ -25,6 +25,14 @@ namespace Stencil.Primary
         {
             get { return this.IFoundation.Resolve<IAssetBusiness>(); }
         }
+        public IPostBusiness Posts
+        {
+            get { return this.IFoundation.Resolve<IPostBusiness>(); }
+        }
+        public IRemarkBusiness Remarks
+        {
+            get { return this.IFoundation.Resolve<IRemarkBusiness>(); }
+        }
         
     }
 }

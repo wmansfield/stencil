@@ -118,6 +118,76 @@ namespace Stencil.Primary
         
         
         
+        public static Post ToDomainModel(this SDK.Models.Post entity, Post destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new Domain.Post(); }
+                Post result = am.Mapper.Map<SDK.Models.Post, Post>(entity, destination);
+                return result;
+            }
+            return null;
+        }
+        public static SDK.Models.Post ToSDKModel(this Post entity, SDK.Models.Post destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new SDK.Models.Post(); }
+                SDK.Models.Post result = am.Mapper.Map<Post, SDK.Models.Post>(entity, destination);
+                return result;
+            }
+            return null;
+        }
+        public static List<SDK.Models.Post> ToSDKModel(this IEnumerable<Post> entities)
+        {
+            List<SDK.Models.Post> result = new List<SDK.Models.Post>();
+            if (entities != null)
+            {
+                foreach (var item in entities)
+                {
+                    result.Add(item.ToSDKModel());
+                }
+            }
+            return result;
+        }
+        
+        
+        
+        public static Remark ToDomainModel(this SDK.Models.Remark entity, Remark destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new Domain.Remark(); }
+                Remark result = am.Mapper.Map<SDK.Models.Remark, Remark>(entity, destination);
+                return result;
+            }
+            return null;
+        }
+        public static SDK.Models.Remark ToSDKModel(this Remark entity, SDK.Models.Remark destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new SDK.Models.Remark(); }
+                SDK.Models.Remark result = am.Mapper.Map<Remark, SDK.Models.Remark>(entity, destination);
+                return result;
+            }
+            return null;
+        }
+        public static List<SDK.Models.Remark> ToSDKModel(this IEnumerable<Remark> entities)
+        {
+            List<SDK.Models.Remark> result = new List<SDK.Models.Remark>();
+            if (entities != null)
+            {
+                foreach (var item in entities)
+                {
+                    result.Add(item.ToSDKModel());
+                }
+            }
+            return result;
+        }
+        
+        
+        
     }
 }
 

@@ -1,0 +1,9 @@
+<template>
+    <div if.bind="data.stepping" class="clearfix paging-container">
+        <div class="pull-right">
+            <span if.bind="data.stepping.total!=0 || data.items.length!=0" class="stepping-current">Showing ${data.stepping.current + 1} - ${data.stepping.current + data.items.length} <span if.bind="data.stepping.total">of ${data.stepping.total}</span></span>
+            <button class="btn btn-default" disabled.bind="(data.stepping.current - step) < 0" click.delegate="loadPrev()">Prev</button>&nbsp;
+            <button class="btn btn-default" disabled.bind="!data.stepping.more" click.delegate="loadNext()">Next</button>
+        </div>
+    </div>
+</template>

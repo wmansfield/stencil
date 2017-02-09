@@ -79,7 +79,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Nest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\NEST.2.3.3\lib\net45\Nest.dll</HintPath>
+      <HintPath>..\packages\NEST.2.3.1\lib\net45\Nest.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -133,6 +133,11 @@
       <DependentUpon>GlobalSettingBusiness.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\Direct\Implementation\InterceptArgs.cs" />
+    <Compile Include="Business\Direct\Implementation\PostBusiness.cs" />
+    <Compile Include="Business\Direct\Implementation\PostBusiness_Crud.cs" />
+    <Compile Include="Business\Direct\Implementation\RemarkBusiness_Crud.cs" />
+    <Compile Include="Business\Direct\IPostBusiness_Crud.cs" />
+    <Compile Include="Business\Direct\IRemarkBusiness_Crud.cs" />
     <Compile Include="Business\Direct\_DirectExtensions.cs" />
     <Compile Include="Business\Index\Factory\DocumentNames.cs" />
     <Compile Include="Business\Index\Factory\IStencilElasticClientFactory.cs" />
@@ -151,7 +156,11 @@
     </Compile>
     <Compile Include="Business\Index\Implementation\IndexerBase.cs" />
     <Compile Include="Business\Index\Implementation\IndexerBaseHealth.cs" />
+    <Compile Include="Business\Index\Implementation\PostIndex_Core.cs" />
+    <Compile Include="Business\Index\Implementation\RemarkIndex_Core.cs" />
     <Compile Include="Business\Index\IndexResult.cs" />
+    <Compile Include="Business\Index\IPostIndex_Core.cs" />
+    <Compile Include="Business\Index\IRemarkIndex_Core.cs" />
     <Compile Include="Business\Index\_IndexExtensions.cs" />
     <Compile Include="Business\Integration\DependencyCoordinator_Core.cs">
       <DependentUpon>DependencyCoordinator.cs</DependentUpon>
@@ -162,7 +171,11 @@
     <Compile Include="Business\Synchronization\Availability.cs" />
     <Compile Include="Business\Synchronization\IAccountSynchronizer_Core.cs" />
     <Compile Include="Business\Synchronization\Implementation\AccountSynchronizer_Core.cs" />
+    <Compile Include="Business\Synchronization\Implementation\PostSynchronizer_Core.cs" />
+    <Compile Include="Business\Synchronization\Implementation\RemarkSynchronizer_Core.cs" />
     <Compile Include="Business\Synchronization\Implementation\SynchronizerBase.cs" />
+    <Compile Include="Business\Synchronization\IPostSynchronizer_Core.cs" />
+    <Compile Include="Business\Synchronization\IRemarkSynchronizer_Core.cs" />
     <Compile Include="Business\Synchronization\ISynchronizer.cs" />
     <Compile Include="Daemons\Agents.cs" />
     <Compile Include="Daemons\WorkerBase.cs" />

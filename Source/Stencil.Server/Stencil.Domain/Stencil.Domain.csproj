@@ -74,6 +74,8 @@
     <Compile Include="Domain\AssetType.cs" />
     <Compile Include="Domain\Dependency.cs" />
     <Compile Include="Domain\GlobalSetting.cs" />
+    <Compile Include="Domain\Post.cs" />
+    <Compile Include="Domain\Remark.cs" />
     <Compile Include="Domain\WellKnownEntitlements.cs" />
     <Compile Include="_DomainExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

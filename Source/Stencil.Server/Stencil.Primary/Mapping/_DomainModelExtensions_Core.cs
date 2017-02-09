@@ -111,6 +111,72 @@ namespace Stencil.Primary
         
         
         
+        public static dbPost ToDbModel(this Post entity, dbPost destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new dbPost(); }
+                return am.Mapper.Map<Post, dbPost>(entity, destination);
+            }
+            return null;
+        }
+        public static Post ToDomainModel(this dbPost entity, Post destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new Post(); }
+                return am.Mapper.Map<dbPost, Post>(entity, destination);
+            }
+            return null;
+        }
+        public static List<Post> ToDomainModel(this IEnumerable<dbPost> entities)
+        {
+            List<Post> result = new List<Post>();
+            if (entities != null)
+            {
+                foreach (var item in entities)
+                {
+                    result.Add(item.ToDomainModel());
+                }
+            }
+            return result;
+        }
+        
+        
+        
+        public static dbRemark ToDbModel(this Remark entity, dbRemark destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new dbRemark(); }
+                return am.Mapper.Map<Remark, dbRemark>(entity, destination);
+            }
+            return null;
+        }
+        public static Remark ToDomainModel(this dbRemark entity, Remark destination = null)
+        {
+            if (entity != null)
+            {
+                if (destination == null) { destination = new Remark(); }
+                return am.Mapper.Map<dbRemark, Remark>(entity, destination);
+            }
+            return null;
+        }
+        public static List<Remark> ToDomainModel(this IEnumerable<dbRemark> entities)
+        {
+            List<Remark> result = new List<Remark>();
+            if (entities != null)
+            {
+                foreach (var item in entities)
+                {
+                    result.Add(item.ToDomainModel());
+                }
+            }
+            return result;
+        }
+        
+        
+        
     }
 }
 

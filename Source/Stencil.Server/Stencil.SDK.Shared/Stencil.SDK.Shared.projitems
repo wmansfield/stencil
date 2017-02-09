@@ -15,6 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\AccountEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\AssetEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\GlobalSettingEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\PostEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Core\RemarkEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\EndpointBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\ServerEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EndpointException.cs" />
@@ -27,6 +29,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\AssetType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\EndpointConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\IItemID.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Post.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Remark_Base.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Post_Base.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Remark.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Requests\AuthLoginInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Requests\PasswordResetInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Requests\PushTokenInput.cs" />

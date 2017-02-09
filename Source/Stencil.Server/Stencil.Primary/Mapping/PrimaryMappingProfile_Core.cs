@@ -48,6 +48,10 @@ namespace Stencil.Primary.Mapping
             am.Mapper.CreateMap<Account, dbAccount>();
             am.Mapper.CreateMap<dbAsset, Asset>();
             am.Mapper.CreateMap<Asset, dbAsset>();
+            am.Mapper.CreateMap<dbPost, Post>();
+            am.Mapper.CreateMap<Post, dbPost>();
+            am.Mapper.CreateMap<dbRemark, Remark>();
+            am.Mapper.CreateMap<Remark, dbRemark>();
             
         }
         protected void DomainAndSDKMappings()
@@ -65,6 +69,12 @@ namespace Stencil.Primary.Mapping
             
             am.Mapper.CreateMap<Domain.Asset, SDK.Models.Asset>();
             am.Mapper.CreateMap<SDK.Models.Asset, Domain.Asset>();
+            
+            am.Mapper.CreateMap<Domain.Post, SDK.Models.Post>();
+            am.Mapper.CreateMap<SDK.Models.Post, Domain.Post>();
+            
+            am.Mapper.CreateMap<Domain.Remark, SDK.Models.Remark>();
+            am.Mapper.CreateMap<SDK.Models.Remark, Domain.Remark>();
             
         }
     }

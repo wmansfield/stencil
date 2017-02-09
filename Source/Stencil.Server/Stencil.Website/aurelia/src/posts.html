@@ -1,0 +1,153 @@
+
+<template>
+  <require from="shared/pager"></require>
+  <require from="shared/search-bar"></require>
+
+  <section class="au-animate">
+    <div class="container">
+      
+        <h3><i class="fa fa-codepen icon-spaced"></i>${'Posts'}
+          <a role="button" click.delegate="refresh()" class="icon-small icon-spaced"><i class="fa fa-refresh" if.bind="!refreshing"></i><i class="fa fa-refresh fa-spin" if.bind="refreshing"></i> </a>
+          <a data-toggle="modal" href="#createModalPost" class="btn btn-secondary demo-element pull-right">${'Create New Post'}</a>
+          <search-bar app.bind="app" service.bind="pageService" entity="Post"></search-bar>
+        </h3>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <td>${'Stamp'}</td>
+                <td>${'Body'}</td>
+                <td>${'Remark Total'}</td>
+                
+                <td>#</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr repeat.for="item of data.items">
+                <td>${item.stamp_utc}</td>
+                <td>${item.body}</td>
+                <td>${item.remark_total}</td>
+                
+                <td><a class="btn-default btn btn-sm" data-toggle="modal" href="#editModalPost" click.delegate="showEdit(item.post_id)" role="button">${'Edit'}</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="hvn-table-footer">
+            <pager data.bind="data" app.bind="app" step.bind="sort.step" service.bind="pageService"></pager>
+         </div>
+    </div>
+    <br/>
+    <br/>
+    
+    <div id="createModalPost" class="modal modal-styled fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 class="modal-title" ><i class="fa fa-codepen icon-spaced"></i>${'Create Post'}</h3>
+            </div> <!-- /.modal-header -->
+
+            <div class="modal-body">
+              
+                  <form id="createFormPost" role="form" class="form parsley-form" submit.delegate="doCreate()" >
+                    <div class="form-group">
+                      <label class="control-label" for="post_id">${'Post ID'}</label>
+                      <input type="text" id="post_id" name="post_id" class="form-control" value.bind="create.post_id" data-parsley-required="false" autocomplete="off" disabled="disabled">
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="account_id">${'Account'}</label>
+                      <select id="account_id" name="account_id" value.bind="create.account_id" class="form-control" data-parsley-required="true" >
+                          <option value="">${'Please Select Account'}</option>
+                          <option repeat.for="item of accounts" model.bind="item.account_id">${item.first_name}</option>
+                      </select>
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="stamp_utc">${'Stamp'}</label>
+                      <input type="text" id="stamp_utc" name="stamp_utc" class="form-control" value.bind="create.stamp_utc" data-parsley-required="true" autocomplete="off" >
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="body">${'Body'}</label>
+                      <input type="text" id="body" name="body" class="form-control" value.bind="create.body" data-parsley-required="false" autocomplete="off" >
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="remark_total">${'Remark Total'}</label>
+                      <input type="text" id="remark_total" name="remark_total" class="form-control" value.bind="create.remark_total" data-parsley-required="true" autocomplete="off" min="0" max="20000" step="1" data-parsley-validation-threshold="1" data-parsley-type="digits">
+                    </div> <!-- /.form-group -->
+                    
+
+                    <div class="form-group">
+                      <div class="text-right">
+                        <button type="button" class="btn btn-default" disabled.bind="submitting" data-dismiss="modal">${'Cancel'}</button>
+                        <button type="submit" class="btn btn-primary" disabled.bind="submitting" >${'Create Post'}</button>
+                      </div>
+                    </div> <!-- /.form-group -->
+                  </form>
+
+            </div> <!-- /.modal-body -->
+
+          </div><!-- /.modal-content -->
+
+        </div><!-- /.modal-dialog -->
+
+      </div> <!-- /.modal -->
+      
+      
+      
+      
+      <div id="editModalPost" class="modal modal-styled fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 class="modal-title" ><i class="fa fa-codepen icon-spaced"></i>${'Edit Post'}</h3>
+            </div> <!-- /.modal-header -->
+
+            <div class="modal-body">
+              
+                  <form id="editFormPost" onsubmit="return false;" role="form" class="form parsley-form" submit.delegate="doUpdate()"  >
+                    <div class="form-group">
+                      <label class="control-label" for="post_id">${'Post ID'}</label>
+                      <input type="text" id="post_id" name="post_id" class="form-control" value.bind="edit.post_id" data-parsley-required="true" autocomplete="off" disabled="disabled">
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="account_id">${'Account'}</label>
+                      <select id="account_id" name="account_id" value.bind="edit.account_id" class="form-control" data-parsley-required="true" >
+                          <option value="">${'Please Select Account'}</option>
+                          <option repeat.for="item of accounts" model.bind="item.account_id">${item.first_name}</option>
+                      </select>
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="stamp_utc">${'Stamp'}</label>
+                      <input type="text" id="stamp_utc" name="stamp_utc" class="form-control" value.bind="edit.stamp_utc" data-parsley-required="true" autocomplete="off" >
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="body">${'Body'}</label>
+                      <input type="text" id="body" name="body" class="form-control" value.bind="edit.body" data-parsley-required="false" autocomplete="off" >
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+                      <label class="control-label" for="remark_total">${'Remark Total'}</label>
+                      <input type="text" id="remark_total" name="remark_total" class="form-control" value.bind="edit.remark_total" data-parsley-required="true" autocomplete="off" min="0" max="20000" step="1" data-parsley-validation-threshold="1" data-parsley-type="digits">
+                    </div> <!-- /.form-group -->
+                    
+
+                    <div class="form-group">
+                      <button type="button" class="btn btn-danger" disabled.bind="submitting" click.delegate="doDelete()" >${'Delete'}</button>
+                        <button type="submit" class="btn btn-success pull-right" disabled.bind="submitting" >${'Save Post'}</button>
+                        <button type="button" class="btn btn-default pull-right btn-right-pad" disabled.bind="submitting" data-dismiss="modal">${'Cancel'}</button>
+                    </div> <!-- /.form-group -->
+                  </form>
+
+            </div> <!-- /.modal-body -->
+
+          </div><!-- /.modal-content -->
+
+        </div><!-- /.modal-dialog -->
+
+      </div> <!-- /.modal -->
+    
+    
+    
+  </section>
+</template>
+

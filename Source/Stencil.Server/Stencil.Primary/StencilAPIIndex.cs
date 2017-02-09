@@ -19,6 +19,14 @@ namespace Stencil.Primary
         {
             get { return this.IFoundation.Resolve<IAccountIndex>(); }
         }
+        public IPostIndex Posts
+        {
+            get { return this.IFoundation.Resolve<IPostIndex>(); }
+        }
+        public IRemarkIndex Remarks
+        {
+            get { return this.IFoundation.Resolve<IRemarkIndex>(); }
+        }
         
     }
 }

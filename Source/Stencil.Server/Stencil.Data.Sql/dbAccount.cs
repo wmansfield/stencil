@@ -14,6 +14,13 @@ namespace Stencil.Data.Sql
     
     public partial class dbAccount
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public dbAccount()
+        {
+            this.Posts = new HashSet<dbPost>();
+            this.Remarks = new HashSet<dbRemark>();
+        }
+    
         public System.Guid account_id { get; set; }
         public string email { get; set; }
         public string password { get; set; }
@@ -40,5 +47,10 @@ namespace Stencil.Data.Sql
         public string push_ios { get; set; }
         public string push_google { get; set; }
         public string push_microsoft { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dbPost> Posts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dbRemark> Remarks { get; set; }
     }
 }
