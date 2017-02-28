@@ -15,10 +15,10 @@ namespace Stencil.SDK.Models
         public virtual Guid account_id { get; set; }
         public virtual DateTime stamp_utc { get; set; }
         public virtual string body { get; set; }
-        public virtual int remark_total { get; set; }
         
         //<IndexOnly>
         
+        public int remark_total { get; set; }
         public string account_name { get; set; }
         
         //</IndexOnly>

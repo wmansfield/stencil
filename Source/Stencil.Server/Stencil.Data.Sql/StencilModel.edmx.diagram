@@ -8,10 +8,10 @@
         <EntityTypeShape EntityType="Stencil.Data.Sql.dbAccount" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Stencil.Data.Sql.dbGlobalSetting" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="Stencil.Data.Sql.dbAsset" Width="1.5" PointX="3.375" PointY="3.75" />
-        <EntityTypeShape EntityType="Stencil.Data.Sql.dbPost" Width="1.5" PointX="3" PointY="10.875" />
         <EntityTypeShape EntityType="Stencil.Data.Sql.dbRemark" Width="1.5" PointX="6.25" PointY="5.875" />
-        <AssociationConnector Association="Stencil.Data.Sql.FK_Post_Account_account_id" />
         <AssociationConnector Association="Stencil.Data.Sql.FK_Remark_Account_account_id" />
+        <EntityTypeShape EntityType="Stencil.Data.Sql.dbPost" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="Stencil.Data.Sql.FK_Post_Account_account_id" />
         <AssociationConnector Association="Stencil.Data.Sql.FK_Remark_Post_post_id" />
       </Diagram>
     </edmx:Diagrams>

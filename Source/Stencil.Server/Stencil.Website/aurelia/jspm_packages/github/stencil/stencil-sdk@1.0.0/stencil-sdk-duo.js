@@ -891,7 +891,7 @@ Stencil.SDK.Models.Post = $d.declare("Stencil.SDK.Models.Post", Stencil.SDK.Mode
         this.stamp_utc = new System.DateTime.ctor();
         this.body = null;
         this.remark_total = 0;
-        this.account_name = 0;
+        this.account_name = null;
     };
     $t.ctor = function Post() {
         $t.$baseType.ctor.call(this);

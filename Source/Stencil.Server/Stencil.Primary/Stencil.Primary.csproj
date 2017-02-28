@@ -171,7 +171,10 @@
     <Compile Include="Business\Synchronization\Availability.cs" />
     <Compile Include="Business\Synchronization\IAccountSynchronizer_Core.cs" />
     <Compile Include="Business\Synchronization\Implementation\AccountSynchronizer_Core.cs" />
-    <Compile Include="Business\Synchronization\Implementation\PostSynchronizer_Core.cs" />
+    <Compile Include="Business\Synchronization\Implementation\PostSynchronizer.cs" />
+    <Compile Include="Business\Synchronization\Implementation\PostSynchronizer_Core.cs">
+      <DependentUpon>PostSynchronizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\Synchronization\Implementation\RemarkSynchronizer_Core.cs" />
     <Compile Include="Business\Synchronization\Implementation\SynchronizerBase.cs" />
     <Compile Include="Business\Synchronization\IPostSynchronizer_Core.cs" />

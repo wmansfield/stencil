@@ -94,7 +94,6 @@ CREATE TABLE [dbo].[Post] (
     ,[account_id] uniqueidentifier NOT NULL
     ,[stamp_utc] datetimeoffset(0) NOT NULL
     ,[body] nvarchar(max) NULL
-    ,[remark_total] int NOT NULL
     ,[created_utc] DATETIMEOFFSET(0) NOT NULL
     ,[updated_utc] DATETIMEOFFSET(0) NOT NULL
     ,[deleted_utc] DATETIMEOFFSET(0) NULL

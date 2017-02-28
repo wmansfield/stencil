@@ -85,7 +85,13 @@ namespace Stencil.Primary.Business.Integration
         {
             base.ExecuteMethod("ProcessRemarkInvalidation", delegate ()
             {
+                Remark item = this.API.Direct.Remarks.GetById(remark_id);
+                if (item != null)
+                {
+                    this.API.Direct.Posts.Invalidate(item.post_id, "Remark changed");
+                }
                 
+                this.API.Integration.Synchronization.AgitateSyncDaemon();
             });
         }
         
