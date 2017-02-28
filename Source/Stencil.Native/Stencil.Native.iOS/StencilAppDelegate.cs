@@ -99,8 +99,7 @@ namespace Stencil.Native.iOS
             }
             else
             {
-                this.LaunchLogin(); //TODO:MUST: Support forked launching
-                // make your own launch____ (ie: Launchdashboard)
+                this.LaunchPrimary();
             }
 
             this.Window.MakeKeyAndVisible();
@@ -201,6 +200,15 @@ namespace Stencil.Native.iOS
                 UINavigationController navController = new UINavigationController(firstController);
                 navController.NavigationBarHidden = true;
                 this.ChangeRootViewController(navController, transition);
+            });
+        }
+
+        public virtual void LaunchPrimary(UIViewAnimationOptions transition = UIViewAnimationOptions.TransitionFlipFromLeft)
+        {
+            CoreUtility.ExecuteMethod("LaunchPrimary", delegate ()
+            {
+                UIViewController firstController = this.MainStoryboard.InstantiateViewController(PrimaryNavigationController.IDENTIFIER);
+                this.ChangeRootViewController(firstController, transition);
             });
         }
 

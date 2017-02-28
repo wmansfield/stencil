@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Stencil.Native.Caching;
 
 namespace Stencil.Native
 {
@@ -38,5 +39,13 @@ namespace Stencil.Native
         void PersistPushNotificationToken(string deviceToken);
 
         string GetLocalizedText(I18NToken token, string defaultText);
+
+
+        void PostsInvalidateCache(string suffix = "");
+        Task<bool> PostsGetAsync(RequestToken requestToken, bool? allowStale, bool force, int skip, int take, FetchedRequestDelegate<ListResult<Post>> onFetched, Action<bool> onFetching = null);
+        Task<ItemResult<Post>> PostCreateAsync(Post post, Action<bool> onFetching = null);
+
+        Task<bool> RemarksGetAsync(RequestToken requestToken, Guid post_id, int skip, int take, Action<RequestToken, ListResult<Remark>> onFetched, Action<bool> onFetching = null);
+        Task<ItemResult<Remark>> RemarkCreateAsync(Remark remark, Action<bool> onFetching = null);
     }
 }

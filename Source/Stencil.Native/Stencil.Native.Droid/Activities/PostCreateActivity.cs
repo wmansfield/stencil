@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,24 +20,26 @@ using Stencil.SDK.Models.Requests;
 namespace Stencil.Native.Droid.Activities
 {
     [Activity(Label = "@string/app_name", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/Theme.Stencil")]
-    public class LoginActivity : BaseActivity, IViewModelView
+    public class PostCreateActivity : BaseActivity, IViewModelView
     {
-        public LoginActivity()
-            : base("LoginActivity")
+        public PostCreateActivity()
+            : base("PostCreateActivity")
         {
         }
 
         #region Controls
 
-        protected EditText txtUser { get { return this.GetControl<EditText>(Resource.Id.general_user); } }
-        protected EditText txtPassword { get { return this.GetControl<EditText>(Resource.Id.general_password); } }
-        protected Button btnLogin { get { return this.GetControl<Button>(Resource.Id.general_button); } }
+        protected EditText txtBody { get { return this.GetControl<EditText>(Resource.Id.text_input); } }
+
+        protected TextView btnBack { get { return this.GetControl<TextView>(Resource.Id.btn_back); } }
+        protected TextView lblHeader { get { return this.GetControl<TextView>(Resource.Id.general_h1); } }
+        protected TextView btnCreate { get { return this.GetControl<TextView>(Resource.Id.btn_create); } }
 
         #endregion
 
         #region Properties
 
-        public LoginViewModel ViewModel { get; set; }
+        public PostCreateViewModel ViewModel { get; set; }
 
         #endregion
 
@@ -49,21 +51,20 @@ namespace Stencil.Native.Droid.Activities
             {
                 base.OnCreate(savedInstanceState);
 
-                this.ViewModel = new LoginViewModel(this);
+                this.ViewModel = new PostCreateViewModel(this);
 
-                this.SetContentView(Resource.Layout.Login);
+                this.SetContentView(Resource.Layout.PostCreate);
 
-                btnLogin.Click += btnLogin_Click;
-                txtUser.Hint = this.ViewModel.Text_General_EmailWatermark;
-                txtPassword.Hint = this.ViewModel.Text_General_PasswordWatermark;
-                btnLogin.Text = this.ViewModel.Text_SignIn;
 
-                OnReturnExecute(txtPassword, DoLogin);
+                lblHeader.Text = this.ViewModel.Text_Title;
+
+                btnBack.Click += btnBack_Click;
+                btnCreate.Click += btnCreate_Click;
+
 
                 this.ViewModel.Start();
             });
         }
-
         protected override void OnResume()
         {
             base.ExecuteMethod("OnResume", delegate ()
@@ -71,11 +72,8 @@ namespace Stencil.Native.Droid.Activities
                 base.OnResume();
 
                 this.ViewModel.OnAppear();
-                
-                Container.ViewPlatform.ShowOutDatedMessageIfNeeded(this);
             });
         }
-
         protected override void OnPause()
         {
             base.ExecuteMethod("OnPause", delegate ()
@@ -90,9 +88,10 @@ namespace Stencil.Native.Droid.Activities
 
         #region Protected Methods
 
-        protected void DoLogin()
+
+        protected void DoAddPost()
         {
-            base.ExecuteMethodAsync("DoLogin", async delegate ()
+            base.ExecuteMethodAsync("DoAddPost", async delegate ()
             {
                 this.HideKeyboard();
 
@@ -101,14 +100,14 @@ namespace Stencil.Native.Droid.Activities
                     return; // pre-validate before we start processing
                 }
 
-                HUD.Show(this, this.ViewModel.Text_LoggingIn);
+                HUD.Show(this, this.ViewModel.Text_General_Sending);
 
-                ActionResult response = await this.ViewModel.LoginAsync(txtUser.Text, txtPassword.Text);
+                ActionResult response = await this.ViewModel.CreatePostAsync(txtBody.Text);
 
                 if(response.IsSuccess())
                 {
                     HUD.Dismiss();
-                    this.StartActivity<PostsActivity>(true, true);
+                    this.FinishWithAnimation();
                 }
                 else
                 {
@@ -116,31 +115,39 @@ namespace Stencil.Native.Droid.Activities
                 }
             });
         }
-
         protected bool IsValid()
         {
             return base.ExecuteFunction("IsValid", delegate ()
             {
-                string errorMessage = this.ViewModel.Validate(txtUser.Text, txtPassword.Text);
-                if (!string.IsNullOrEmpty(errorMessage))
+                string errorMessage = this.ViewModel.Validate(txtBody.Text);
+                if(!string.IsNullOrEmpty(errorMessage))
                 {
-                    HUD.ShowErrorWithStatus(this, errorMessage, 1800);
+                    HUD.ShowErrorWithStatus(this, errorMessage, 2800);
                     return false;
                 }
                 return true;
             });
         }
-       
+
         #endregion
 
         #region Event Handlers
 
 
-        public void btnLogin_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            this.DoLogin();
+            base.ExecuteMethod("btnBack_Click", delegate ()
+            {
+                this.FinishWithAnimation();
+            });
         }
-
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            base.ExecuteMethod("btnCreate_Click", delegate ()
+            {
+                this.DoAddPost();
+            });
+        }
         #endregion
     }
 }

@@ -133,6 +133,42 @@
     <Compile Include="Main.cs" />
     <Compile Include="Push\PushNotificationProcessor.cs" />
     <Compile Include="StencilAppDelegate.cs" />
+    <Compile Include="Controllers\PostCreateController.cs" />
+    <Compile Include="Controllers\PostCreateController.designer.cs">
+      <DependentUpon>PostCreateController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\PostsController.designer.cs">
+      <DependentUpon>PostsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\PrimaryNavigationController.cs" />
+    <Compile Include="Controllers\PrimaryNavigationController.designer.cs">
+      <DependentUpon>PrimaryNavigationController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\CellPost.cs" />
+    <Compile Include="Cells\CellPost.designer.cs">
+      <DependentUpon>CellPost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\CellPostText.cs" />
+    <Compile Include="Cells\CellPostText.designer.cs">
+      <DependentUpon>CellPostText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\RemarkCreateController.cs" />
+    <Compile Include="Controllers\RemarkCreateController.designer.cs">
+      <DependentUpon>RemarkCreateController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\RemarksController.cs" />
+    <Compile Include="Controllers\RemarksController.designer.cs">
+      <DependentUpon>RemarksController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\CellRemark.cs" />
+    <Compile Include="Cells\CellRemark.designer.cs">
+      <DependentUpon>CellRemark.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cells\CellRemarkText.cs" />
+    <Compile Include="Cells\CellRemarkText.designer.cs">
+      <DependentUpon>CellRemarkText.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Stencil.SDK.iOS\Stencil.SDK.iOS.csproj">
@@ -166,6 +202,9 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\Icon-76%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\Icon-60%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\Icon-60%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Cells\" />
   </ItemGroup>
   <Import Project="..\Stencil.Native\Stencil.Native.projitems" Label="Shared" Condition="Exists('..\Stencil.Native\Stencil.Native.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -19,7 +19,7 @@ namespace Stencil.SDK.Models
         
         //<IndexOnly>
         
-        public int account_name { get; set; }
+        public string account_name { get; set; }
         
         //</IndexOnly>
 	}

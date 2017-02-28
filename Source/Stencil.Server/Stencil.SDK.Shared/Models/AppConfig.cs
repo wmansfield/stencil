@@ -23,6 +23,13 @@ namespace Stencil.SDK.Models
                 ScrollThresholdSize = 100,
                 ScrollThresholdCount = 4
             };
+            this.Posts = new EndpointConfig()
+            {
+                StaleSeconds = 60,
+                PageSize = 10,
+                ScrollThresholdSize = 200,
+                ScrollThresholdCount = 4
+            };
         }
         public int ImageUploadSize_Width { get; set; }
         public int ImageUploadSize_Height { get; set; }
@@ -31,5 +38,7 @@ namespace Stencil.SDK.Models
         public int AppVersionCheckIntervalHours { get; set; }
         public int AccountVerifyIntervalHours { get; set; }
         public EndpointConfig Widget { get; set; }
+
+        public EndpointConfig Posts { get; set; }
     }
 }

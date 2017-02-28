@@ -1062,5 +1062,89 @@ namespace Stencil.Native.App
 
         #endregion
 
+
+        public virtual void PostsInvalidateCache(string suffix = "")
+        {
+            base.ExecuteMethod("PostsInvalidateCache", delegate ()
+            {
+                string cachePrefix = string.Format("/posts/{0}", suffix);
+                this.DataCache.ClearWithPrefix(cachePrefix);
+                this.DataCache.InvalidateTimedPrefix(cachePrefix);
+            });
+        }
+        public virtual Task<bool> PostsGetAsync(RequestToken requestToken, bool? allowStale, bool force, int skip, int take, FetchedRequestDelegate<ListResult<Post>> onFetched, Action<bool> onFetching = null)
+        {
+            return base.ExecuteFunction("PostsGetAsync", delegate ()
+            {
+                string cachePrefix = string.Format("/posts/");
+                string cacheKey = string.Format("?skip={0}&take={1}", skip, take);
+                int staleLimit = force ? 0 : this.AppConfig.Posts.StaleSeconds;
+                if(!allowStale.HasValue)
+                {
+                    allowStale = (staleLimit != 0);
+                }
+                if(force)
+                {
+                    this.PostsInvalidateCache();
+                }
+                return this.FetchListAsync<Post>(requestToken, allowStale.Value, cachePrefix, cacheKey, staleLimit, onFetched, onFetching, async delegate ()
+                {
+                    StencilSDK sdk = this.GetSDK(true);
+                    var result = await sdk.Post.Find(skip, take, string.Empty, "stamp_utc", true);
+
+                    return result;
+                });
+            });
+        }
+
+        public virtual Task<ItemResult<Post>> PostCreateAsync(Post post, Action<bool> onFetching = null)
+        {
+            return base.ExecuteThrowingFunction("PostCreateAsync", delegate ()
+            {
+                return this.PostItemUnSafeAsync<ItemResult<Post>>(onFetching, async delegate ()
+                {
+                    StencilSDK sdk = this.GetSDK(true);
+                    ItemResult<Post> result = await sdk.Post.CreatePostAsync(post);
+                    if(result.IsSuccess())
+                    {
+                        this.PostsInvalidateCache();
+                    }
+                    return result;
+                });
+
+            });
+        }
+
+        public virtual Task<bool> RemarksGetAsync(RequestToken requestToken, Guid post_id, int skip, int take, Action<RequestToken, ListResult<Remark>> onFetched, Action<bool> onFetching = null)
+        {
+            return base.ExecuteFunction("RemarksGetAsync", delegate ()
+            {
+                return this.GetListAsync<Remark>(requestToken, onFetched, onFetching, async delegate ()
+                {
+                    StencilSDK sdk = this.GetSDK(true);
+                    var result = await sdk.Remark.Find(skip, take, string.Empty, "stamp_utc", true, post_id);
+
+                    return result;
+                });
+            });
+        }
+
+        public virtual Task<ItemResult<Remark>> RemarkCreateAsync(Remark remark, Action<bool> onFetching = null)
+        {
+            return base.ExecuteThrowingFunction("RemarkCreateAsync", delegate ()
+            {
+                return this.PostItemUnSafeAsync<ItemResult<Remark>>(onFetching, async delegate ()
+                {
+                    StencilSDK sdk = this.GetSDK(true);
+                    ItemResult<Remark> result = await sdk.Remark.CreateRemarkAsync(remark);
+                    if(result.IsSuccess())
+                    {
+                        this.PostsInvalidateCache();
+                    }
+                    return result;
+                });
+
+            });
+        }
     }
 }

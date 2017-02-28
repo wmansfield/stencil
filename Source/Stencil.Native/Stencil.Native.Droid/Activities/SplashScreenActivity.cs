@@ -49,8 +49,7 @@ namespace Stencil.Native.Droid.Activities
 
                 if (this.StencilApp.CurrentAccount != null)
                 {
-                    //TODO:MUST: Launch proper initial activity
-                    this.StartActivity<LoginActivity>(true, _initialBundle);
+                    this.StartActivity<PostsActivity>(true, _initialBundle);
                 }
                 else
                 {

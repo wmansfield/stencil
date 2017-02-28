@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Stencil.Native.Core;
+using Stencil.SDK;
+using Stencil.SDK.Models.Requests;
+using Stencil.SDK.Models.Responses;
 
 namespace Stencil.Native.ViewModels
 {
@@ -54,6 +59,42 @@ namespace Stencil.Native.ViewModels
                     return this.Text_MissingUserName;
                 }
                 return string.Empty;
+            });
+        }
+
+        public Task<ActionResult> LoginAsync(string userName, string password)
+        {
+            return base.ExecuteFunctionAsync<ActionResult>("LoginAsync", async delegate ()
+            {
+                string validationMessage = this.Validate(userName, password);
+                if(!string.IsNullOrEmpty(validationMessage))
+                {
+                    return new ActionResult()
+                    {
+                        success = false,
+                        message = validationMessage
+                    };
+                }
+                else
+                {
+                    try
+                    {
+                        ItemResult<AccountInfo> response = await this.StencilApp.LoginAsyncSafe(new AuthLoginInput()
+                        {
+                            password = password,
+                            user = userName
+                        });
+                        return response;
+                    }
+                    catch(Exception ex)
+                    {
+                        return new ActionResult()
+                        {
+                            success = false,
+                            message = ex.FirstNonAggregateException().Message
+                        };
+                    }
+                }
             });
         }
     }

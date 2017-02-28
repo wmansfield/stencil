@@ -6,5 +6,6 @@ namespace Stencil.SDK.Models
 {
     public class PostBase : SDKModel
     {
+
     }
 }

@@ -21,7 +21,13 @@ namespace Stencil.Native.ViewModels
         }
 
         #region Language
-
+        public string Text_General_MustProvideText
+        {
+            get
+            {
+                return this.StencilApp.GetLocalizedText(I18NToken.General_MustProvideText, "You must provide text");
+            }
+        }
 
         public string Text_General_EmailWatermark
         {

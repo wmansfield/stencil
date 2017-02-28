@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/active">
+        <Stencil.Native.Droid.CoreTextView
+            android:textSize="15sp"
+            android:text="Log Out"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white"
+            android:gravity="center_vertical"
+            android:id="@+id/btn_logoff"
+            android:clickable="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="15dp" />
+        <Stencil.Native.Droid.CoreTextView
+            android:id="@+id/general_h1"
+            android:textSize="17sp"
+            android:text="Page Title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_weight="1" />
+        <Stencil.Native.Droid.CoreTextView
+            android:textSize="15sp"
+            android:text="Create"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white"
+            android:gravity="center_vertical"
+            android:id="@+id/btn_create"
+            android:clickable="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="15dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Stencil.Native.Droid.CoreSwipeRefreshLayout
+            android:id="@+id/general_refresh_control"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ListView
+                android:id="@+id/general_list"
+                android:minHeight="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_margin="0dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:dividerHeight="1sp"
+                android:divider="@null" />
+        </Stencil.Native.Droid.CoreSwipeRefreshLayout>
+    </LinearLayout>
+</LinearLayout>

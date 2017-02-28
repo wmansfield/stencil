@@ -10,11 +10,11 @@ namespace Stencil.Native
         //TODO:SHOULD:Stencil: find/replace socialhaven and replace with proper urls/emails
         //TODO:COULD: Find/replace for "Stencil" and "stencil" and replace with your own phrase [outside of VS recommended -- AND BE CAREFUL]
 
-#if DEBUG
-        public static string BASE_API_URL = "http://192.168.1.124:4328/api/";
+        #if DEBUG
+        //public static string BASE_API_URL = "http://192.168.1.124:4328/api/";
         #endif
 
-        //public static string BASE_API_URL = "https://stencil.socialhaven.com/api/";
+        public static string BASE_API_URL = "https://stencil-demo.azurewebsites.net/api/";
 
         public static string INTERNAL_APP_NAME = "stencil";
         public static string EXTERNAL_APP_NAME = "Stencil";

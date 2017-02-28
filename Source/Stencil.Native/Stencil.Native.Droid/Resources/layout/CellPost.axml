@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Stencil.Native.Droid.CoreTextView
+        android:id="@+id/general_text"
+        android:textSize="16sp"
+        android:text="Text Goes Here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/active"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp" />
+    <Stencil.Native.Droid.CoreTextView
+        android:id="@+id/general_account"
+        android:textSize="16sp"
+        android:text="Text Goes Here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/active"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="right" />
+</LinearLayout>

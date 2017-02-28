@@ -49,25 +49,21 @@ namespace Stencil.Native.iOS
 
                 if (!this.IsValid())
                 {
-                    return;
+                    return; // pre-validate before we start processing
                 }
 
                 HUD.Show(this.ViewModel.Text_LoggingIn);
 
-                ItemResult<AccountInfo> response = await this.StencilApp.LoginAsyncSafe(new AuthLoginInput()
-                {
-                    password = txtPassword.Text,
-                    user = txtName.Text
-                });
+                ActionResult response = await this.ViewModel.LoginAsync(txtName.Text, txtPassword.Text);
 
-                if (response.IsSuccess())
+                if(response.IsSuccess())
                 {
-                    HUD.ShowSuccessWithStatus(string.Format("Welcome {0}!", this.StencilApp.CurrentAccount.first_name), 1200);
-                    //TODO:MUST: Navigate to first screen.   StencilAppDelegate.Current.Launch_____();
+                    HUD.Dismiss();
+                    StencilAppDelegate.Current.LaunchPrimary();
                 }
                 else
                 {
-                    HUD.ShowErrorWithStatus(response.GetMessage(), 1200);
+                    HUD.ShowErrorWithStatus(response.GetMessage(), 2800);
                 }
             });
         }
@@ -78,7 +74,7 @@ namespace Stencil.Native.iOS
                 string errorMessage = this.ViewModel.Validate(txtName.Text, txtPassword.Text);
                 if (!string.IsNullOrEmpty(errorMessage))
                 {
-                    HUD.ShowErrorWithStatus(errorMessage, 1800);
+                    HUD.ShowErrorWithStatus(errorMessage, 2800);
                     return false;
                 }
                 return true;

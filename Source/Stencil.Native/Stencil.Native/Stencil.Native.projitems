@@ -49,5 +49,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IDataListViewModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IViewModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PostsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PostCreateViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RemarksViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RemarkCreateViewModel.cs" />
   </ItemGroup>
 </Project>

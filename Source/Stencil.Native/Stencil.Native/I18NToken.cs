@@ -18,6 +18,14 @@ namespace Stencil.Native
         Login_MissingPassword, //"You must provide a password"
         Login_SignIn, //"Sign In"
 
+        Posts_Title, //"Posts"
+        PostCreate_Title, //"New Post"
+        PostCreate_Create, //"Create"
+
+        Remarks_Title, //"Posts"
+        RemarksCreate_Title, //"New Remark"
+        RemarksCreate_Create, //"Create"
+
         General_NoResultsFor, //"No results found for: {0}"
         General_ErrorSearching, //"Error Searching, please try again."
         General_Edit, //"Edit"
