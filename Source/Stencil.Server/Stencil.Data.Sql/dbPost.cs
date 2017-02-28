@@ -24,7 +24,6 @@ namespace Stencil.Data.Sql
         public System.Guid account_id { get; set; }
         public System.DateTimeOffset stamp_utc { get; set; }
         public string body { get; set; }
-        public int remark_total { get; set; }
         public System.DateTimeOffset created_utc { get; set; }
         public System.DateTimeOffset updated_utc { get; set; }
         public Nullable<System.DateTimeOffset> deleted_utc { get; set; }

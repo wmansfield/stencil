@@ -186,6 +186,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="_build.txt" />
+    <None Include="Properties\PublishProfiles\stencil-demo - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\stencil-demo - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

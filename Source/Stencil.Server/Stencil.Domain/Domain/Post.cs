@@ -17,7 +17,6 @@ namespace Stencil.Domain
         public Guid account_id { get; set; }
         public DateTime stamp_utc { get; set; }
         public string body { get; set; }
-        public int remark_total { get; set; }
         public DateTime created_utc { get; set; }
         public DateTime updated_utc { get; set; }
         public DateTime? deleted_utc { get; set; }

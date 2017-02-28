@@ -30,8 +30,8 @@ namespace Stencil.Data.Sql
         public virtual DbSet<dbAccount> dbAccounts { get; set; }
         public virtual DbSet<dbGlobalSetting> dbGlobalSettings { get; set; }
         public virtual DbSet<dbAsset> dbAssets { get; set; }
-        public virtual DbSet<dbPost> dbPosts { get; set; }
         public virtual DbSet<dbRemark> dbRemarks { get; set; }
+        public virtual DbSet<dbPost> dbPosts { get; set; }
     
         public virtual ObjectResult<Nullable<System.Guid>> spAccount_HydrateSyncGetInvalid(Nullable<int> allowableSecondsToProcessIndex, string sync_agent)
         {

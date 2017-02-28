@@ -85,7 +85,6 @@
           <Property Name="account_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="stamp_utc" Type="datetimeoffset" Precision="0" Nullable="false" />
           <Property Name="body" Type="nvarchar(max)" />
-          <Property Name="remark_total" Type="int" Nullable="false" />
           <Property Name="created_utc" Type="datetimeoffset" Precision="0" Nullable="false" />
           <Property Name="updated_utc" Type="datetimeoffset" Precision="0" Nullable="false" />
           <Property Name="deleted_utc" Type="datetimeoffset" Precision="0" />
@@ -270,18 +269,9 @@
           <FunctionImport Name="spIndexHydrate_InvalidateAll" />
           <FunctionImport Name="spIndexHydrate_Status" ReturnType="Collection(Stencil.Data.Sql.spIndexHydrate_Status_Result)" />
           <EntitySet Name="dbAssets" EntityType="Stencil.Data.Sql.dbAsset" />
-          <EntitySet Name="dbPosts" EntityType="Stencil.Data.Sql.dbPost" />
           <EntitySet Name="dbRemarks" EntityType="Stencil.Data.Sql.dbRemark" />
-          <AssociationSet Name="FK_Post_Account_account_id" Association="Stencil.Data.Sql.FK_Post_Account_account_id">
-            <End Role="dbAccount" EntitySet="dbAccounts" />
-            <End Role="Post" EntitySet="dbPosts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Remark_Account_account_id" Association="Stencil.Data.Sql.FK_Remark_Account_account_id">
             <End Role="dbAccount" EntitySet="dbAccounts" />
-            <End Role="Remark" EntitySet="dbRemarks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Remark_Post_post_id" Association="Stencil.Data.Sql.FK_Remark_Post_post_id">
-            <End Role="Post" EntitySet="dbPosts" />
             <End Role="Remark" EntitySet="dbRemarks" />
           </AssociationSet>
           <FunctionImport Name="spPost_HydrateSyncGetInvalid" ReturnType="Collection(Guid)">
@@ -324,6 +314,15 @@
             <Parameter Name="sync_success_utc" Mode="In" Type="DateTimeOffset" />
             <Parameter Name="sync_log" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="dbPosts" EntityType="Stencil.Data.Sql.dbPost" />
+          <AssociationSet Name="FK_Post_Account_account_id" Association="Stencil.Data.Sql.FK_Post_Account_account_id">
+            <End Role="dbAccount" EntitySet="dbAccounts" />
+            <End Role="Post" EntitySet="dbPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Remark_Post_post_id" Association="Stencil.Data.Sql.FK_Remark_Post_post_id">
+            <End Role="Post" EntitySet="dbPosts" />
+            <End Role="dbRemark" EntitySet="dbRemarks" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="dbAccount">
           <Key>
@@ -355,8 +354,8 @@
           <Property Name="push_ios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="push_google" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="push_microsoft" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Posts" Relationship="Stencil.Data.Sql.FK_Post_Account_account_id" FromRole="dbAccount" ToRole="Post" />
           <NavigationProperty Name="Remarks" Relationship="Stencil.Data.Sql.FK_Remark_Account_account_id" FromRole="dbAccount" ToRole="Remark" />
+          <NavigationProperty Name="Posts" Relationship="Stencil.Data.Sql.FK_Post_Account_account_id" FromRole="dbAccount" ToRole="Post" />
         </EntityType>
         <EntityType Name="dbGlobalSetting">
           <Key>
@@ -407,27 +406,6 @@
           <Property Name="created_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
           <Property Name="updated_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
         </EntityType>
-        <EntityType Name="dbPost">
-          <Key>
-            <PropertyRef Name="post_id" />
-          </Key>
-          <Property Name="post_id" Type="Guid" Nullable="false" />
-          <Property Name="account_id" Type="Guid" Nullable="false" />
-          <Property Name="stamp_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
-          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="remark_total" Type="Int32" Nullable="false" />
-          <Property Name="created_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
-          <Property Name="updated_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
-          <Property Name="deleted_utc" Type="DateTimeOffset" Precision="0" />
-          <Property Name="sync_hydrate_utc" Type="DateTimeOffset" Precision="0" />
-          <Property Name="sync_success_utc" Type="DateTimeOffset" Precision="0" />
-          <Property Name="sync_invalid_utc" Type="DateTimeOffset" Precision="0" />
-          <Property Name="sync_attempt_utc" Type="DateTimeOffset" Precision="0" />
-          <Property Name="sync_agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sync_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account" Relationship="Stencil.Data.Sql.FK_Post_Account_account_id" FromRole="Post" ToRole="dbAccount" />
-          <NavigationProperty Name="Remarks" Relationship="Stencil.Data.Sql.FK_Remark_Post_post_id" FromRole="Post" ToRole="Remark" />
-        </EntityType>
         <EntityType Name="dbRemark">
           <Key>
             <PropertyRef Name="remark_id" />
@@ -447,7 +425,39 @@
           <Property Name="sync_agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sync_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="Stencil.Data.Sql.FK_Remark_Account_account_id" FromRole="Remark" ToRole="dbAccount" />
-          <NavigationProperty Name="Post" Relationship="Stencil.Data.Sql.FK_Remark_Post_post_id" FromRole="Remark" ToRole="Post" />
+          <NavigationProperty Name="Post" Relationship="Stencil.Data.Sql.FK_Remark_Post_post_id" FromRole="dbRemark" ToRole="Post" />
+        </EntityType>
+        <Association Name="FK_Remark_Account_account_id">
+          <End Type="Stencil.Data.Sql.dbAccount" Role="dbAccount" Multiplicity="1" />
+          <End Type="Stencil.Data.Sql.dbRemark" Role="Remark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dbAccount">
+              <PropertyRef Name="account_id" />
+            </Principal>
+            <Dependent Role="Remark">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="dbPost">
+          <Key>
+            <PropertyRef Name="post_id" />
+          </Key>
+          <Property Name="post_id" Type="Guid" Nullable="false" />
+          <Property Name="account_id" Type="Guid" Nullable="false" />
+          <Property Name="stamp_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
+          <Property Name="updated_utc" Type="DateTimeOffset" Nullable="false" Precision="0" />
+          <Property Name="deleted_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_hydrate_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_success_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_invalid_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_attempt_utc" Type="DateTimeOffset" Precision="0" />
+          <Property Name="sync_agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sync_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Stencil.Data.Sql.FK_Post_Account_account_id" FromRole="Post" ToRole="dbAccount" />
+          <NavigationProperty Name="Remarks" Relationship="Stencil.Data.Sql.FK_Remark_Post_post_id" FromRole="Post" ToRole="dbRemark" />
         </EntityType>
         <Association Name="FK_Post_Account_account_id">
           <End Type="Stencil.Data.Sql.dbAccount" Role="dbAccount" Multiplicity="1" />
@@ -461,26 +471,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Remark_Account_account_id">
-          <End Type="Stencil.Data.Sql.dbAccount" Role="dbAccount" Multiplicity="1" />
-          <End Type="Stencil.Data.Sql.dbRemark" Role="Remark" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="dbAccount">
-              <PropertyRef Name="account_id" />
-            </Principal>
-            <Dependent Role="Remark">
-              <PropertyRef Name="account_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Remark_Post_post_id">
           <End Type="Stencil.Data.Sql.dbPost" Role="Post" Multiplicity="1" />
-          <End Type="Stencil.Data.Sql.dbRemark" Role="Remark" Multiplicity="*" />
+          <End Type="Stencil.Data.Sql.dbRemark" Role="dbRemark" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Post">
               <PropertyRef Name="post_id" />
             </Principal>
-            <Dependent Role="Remark">
+            <Dependent Role="dbRemark">
               <PropertyRef Name="post_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -590,26 +588,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbPosts">
-            <EntityTypeMapping TypeName="Stencil.Data.Sql.dbPost">
-              <MappingFragment StoreEntitySet="Post">
-                <ScalarProperty Name="sync_log" ColumnName="sync_log" />
-                <ScalarProperty Name="sync_agent" ColumnName="sync_agent" />
-                <ScalarProperty Name="sync_attempt_utc" ColumnName="sync_attempt_utc" />
-                <ScalarProperty Name="sync_invalid_utc" ColumnName="sync_invalid_utc" />
-                <ScalarProperty Name="sync_success_utc" ColumnName="sync_success_utc" />
-                <ScalarProperty Name="sync_hydrate_utc" ColumnName="sync_hydrate_utc" />
-                <ScalarProperty Name="deleted_utc" ColumnName="deleted_utc" />
-                <ScalarProperty Name="updated_utc" ColumnName="updated_utc" />
-                <ScalarProperty Name="created_utc" ColumnName="created_utc" />
-                <ScalarProperty Name="remark_total" ColumnName="remark_total" />
-                <ScalarProperty Name="body" ColumnName="body" />
-                <ScalarProperty Name="stamp_utc" ColumnName="stamp_utc" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="post_id" ColumnName="post_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dbRemarks">
             <EntityTypeMapping TypeName="Stencil.Data.Sql.dbRemark">
               <MappingFragment StoreEntitySet="Remark">
@@ -638,6 +616,25 @@
           <FunctionImportMapping FunctionImportName="spRemark_HydrateSyncUpdate" FunctionName="Stencil.Data.Sql.Store.spRemark_HydrateSyncUpdate" />
           <FunctionImportMapping FunctionImportName="spRemark_SyncGetInvalid" FunctionName="Stencil.Data.Sql.Store.spRemark_SyncGetInvalid" />
           <FunctionImportMapping FunctionImportName="spRemark_SyncUpdate" FunctionName="Stencil.Data.Sql.Store.spRemark_SyncUpdate" />
+          <EntitySetMapping Name="dbPosts">
+            <EntityTypeMapping TypeName="Stencil.Data.Sql.dbPost">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="sync_log" ColumnName="sync_log" />
+                <ScalarProperty Name="sync_agent" ColumnName="sync_agent" />
+                <ScalarProperty Name="sync_attempt_utc" ColumnName="sync_attempt_utc" />
+                <ScalarProperty Name="sync_invalid_utc" ColumnName="sync_invalid_utc" />
+                <ScalarProperty Name="sync_success_utc" ColumnName="sync_success_utc" />
+                <ScalarProperty Name="sync_hydrate_utc" ColumnName="sync_hydrate_utc" />
+                <ScalarProperty Name="deleted_utc" ColumnName="deleted_utc" />
+                <ScalarProperty Name="updated_utc" ColumnName="updated_utc" />
+                <ScalarProperty Name="created_utc" ColumnName="created_utc" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="stamp_utc" ColumnName="stamp_utc" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
