@@ -755,7 +755,8 @@ namespace <xsl:value-of select="items/@projectName"/>.Primary.Business.Index
     {
         partial void MapIndexModels(CreateIndexDescriptor indexer)
         {
-            <xsl:for-each select="items/item[@useIndex='true']">indexer.Mappings(mp => mp.Map&lt;sdk.<xsl:value-of select="@name"/>&gt;(DocumentNames.<xsl:value-of select="@name"/>, p => p
+            MappingsDescriptor descriptor = new MappingsDescriptor();
+            <xsl:for-each select="items/item[@useIndex='true']">descriptor.AddMapping&lt;sdk.<xsl:value-of select="@name"/>&gt;(DocumentNames.<xsl:value-of select="@name"/>, p => p
                 .AutoMap()<xsl:if test="string-length(@indexParent) > 0">
                 .Parent(DocumentNames.<xsl:value-of select="@indexParent"/>)</xsl:if>
                 .Properties(props => props
@@ -807,8 +808,9 @@ namespace <xsl:value-of select="items/@projectName"/>.Primary.Business.Index
 
                     )</xsl:for-each>
                 )
-            ));
+            );
             </xsl:for-each>
+            indexer.Mappings(m => descriptor);
         }
     }
 }
